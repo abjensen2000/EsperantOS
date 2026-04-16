@@ -16,20 +16,16 @@ namespace EsperantOS.Controllers
 
         public IActionResult Index()
         {
-            _context.Medarbejdere.Add(new Medarbejder(0, "Christian", false));
+            //_context.Medarbejdere.Add(new Medarbejder(0, "Christian", false));
             _context.SaveChanges();
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Upvote()
         {
-            return View();
+            return Upvote();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+
     }
 }

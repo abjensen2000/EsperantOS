@@ -6,6 +6,7 @@
         private DateTime _dato;
         private bool _ædru;
         private bool _frigivet;
+        private List<Medarbejder> _medarbejdere;
 
         public Vagt(int id, DateTime dato, bool ædru, bool frigivet)
         {
@@ -19,5 +20,7 @@
         public DateTime Dato { get => _dato; set => _dato = value; }
         public bool Ædru { get => _ædru; set => _ædru = value; }
         public bool Frigivet { get => _frigivet; set => _frigivet = value; }
+
+        public List<Medarbejder> Medarbejdere { get => _medarbejdere; set => _medarbejdere = value; }
     }
 }
