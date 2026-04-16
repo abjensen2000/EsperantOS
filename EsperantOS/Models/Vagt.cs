@@ -8,12 +8,15 @@
         private bool _frigivet;
         private List<Medarbejder> _medarbejdere;
 
+        public Vagt() { }
+
         public Vagt(int id, DateTime dato, bool ædru, bool frigivet)
         {
             this._id = id;
             this._dato = dato;
             this._ædru = ædru;
             this._frigivet = frigivet;
+            this._medarbejdere = new List<Medarbejder>();
         }
 
         public int Id { get => _id; set => _id = value; }

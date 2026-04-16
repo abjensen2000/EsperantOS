@@ -1,0 +1,37 @@
+﻿@model EsperantOS.Models.LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="vagtplan-modal" style="max-width: 400px; margin: 100px auto;">
+    <div class="modal-header" style="justify-content: center; border-bottom: none; padding-top: 30px;">
+        <h2 style="color: #333; margin: 0; font-size: 24px; text-align: center; width: 100%;">EsperantOS Login</h2>
+    </div>
+
+    <div class="modal-body" style="min-height: auto; padding: 30px; display: block;">
+        <form asp-action="Login" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger" style="margin-bottom: 15px; color: #ef4444; font-size: 14px;"></div>
+            
+            <div class="input-group" style="margin-bottom: 20px; flex-direction: column; align-items: flex-start;">
+                <label style="color: #333; margin-bottom: 5px; display:block; font-size: 14px; font-weight: bold;">Brugernavn</label>
+                <div class="time-field" style="width: 100%; border: 1px solid #d0d0d0; border-radius: 6px; padding: 5px 10px; background: #fff; display: flex; align-items: center;">
+                    <span class="icon">👤</span>
+                    <input asp-for="Username" style="border: none; outline: none; width: 100%; font-size: 14px;" placeholder="Brugernavn" />
+                </div>
+            </div>
+            
+            <div class="input-group" style="margin-bottom: 30px; flex-direction: column; align-items: flex-start;">
+                <label style="color: #333; margin-bottom: 5px; display:block; font-size: 14px; font-weight: bold;">Kodeord</label>
+                <div class="time-field" style="width: 100%; border: 1px solid #d0d0d0; border-radius: 6px; padding: 5px 10px; background: #fff; display: flex; align-items: center;">
+                    <span class="icon">🔒</span>
+                    <input asp-for="Password" type="password" style="border: none; outline: none; width: 100%; font-size: 14px;" placeholder="Password" />
+                </div>
+            </div>
+
+            <button type="submit" class="btn-take" style="background-color: #3b82f6; color: white; border: none; border-radius: 6px; padding: 12px; width: 100%; font-size: 16px; font-weight: bold; cursor: pointer;">
+                Log ind
+            </button>
+        </form>
+    </div>
+</div>

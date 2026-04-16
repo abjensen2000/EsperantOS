@@ -1,15 +1,82 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model EsperantOS.Models.HomeViewModel
+@{
+    ViewData["Title"] = "Forside";
 }
 
-<div class="text-center">
+<div class="vagtplan-modal">
+<div class="modal-header" style="display: flex; justify-content: flex-end; align-items: center; padding: 10px 15px;">
+    <span style="font-size: 14px; color: #666; font-weight: bold; margin-right: 15px;">👤 Logget ind som: @User.Identity?.Name</span>
+    <a asp-controller="Account" asp-action="Logout" style="font-size: 14px; color: #ef4444; font-weight: bold; text-decoration: none;">Log ud</a>
+</div>
 
-    <h1>FORSIDE</h1>
+<div class="modal-body">
+<div class="sidebar">
+    <button class="sidebar-btn active" data-view="forside">Forside</button>
+    <a asp-controller="Vagts" asp-action="Index" asp-route-view="vagtplan" class="sidebar-btn" style="text-decoration:none; display:block; text-align:center;">Vagtplan</a>
+    <a asp-controller="Vagts" asp-action="Index" asp-route-view="frigivede" class="sidebar-btn" style="text-decoration:none; display:block; text-align:center;">Frigivede vagter</a>
+</div>
 
+        <div class="main-content" style="padding: 30px;">
+            <h1 style="color: #333; margin-top: 0; font-size: 28px;">EsperantOS Dashboard</h1>
+            
+            <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 30px;">
+                
+                <!-- Information Board (Bestyrelsen) -->
+                <div style="flex: 1; min-width: 300px;">
+                    <div class="shift-card" style="background-color: #e0f2fe; border-color: #bae6fd; display: flex; flex-direction: column;">
+                        <h3 style="color: #0369a1; margin: 0 0 10px 0; font-size: 18px;">📢 Beskeder fra bestyrelsen</h3>
+                        <p style="color: #0c4a6e; font-size: 15px; line-height: 1.5;">@Model.BestyrelsesBesked</p>
+                        
+                        <!-- Eventuel "Skriv ny besked" knap for Admins i fremtiden -->
+                        <div style="margin-top: auto; pt-3; text-align: right;">
+                            <button style="background: none; border: none; color: #0284c7; cursor: pointer; text-decoration: underline; font-size: 13px;">Rediger besked (Admin)</button>
+                        </div>
+                    </div>
+                </div>
 
- 
-    <form action="" method="get">
-        <input type="submit" name="upvote" value="Upvote" />
-    </form>
-
+                <!-- Quick Info: Egne vagter -->
+                <div style="flex: 1; min-width: 300px;">
+                    <h3 style="color: #333; margin: 0 0 15px 0; font-size: 18px;">📅 Mine kommende vagter</h3>
+                    
+                    @if (Model.MineVagter != null && Model.MineVagter.Any())
+                    {
+                        <div style="display: flex; flex-direction: column; gap: 15px;">
+                            @foreach (var vagt in Model.MineVagter.Where(v => !v.Frigivet).Take(3))
+                            {
+                                <div class="shift-card" style="padding: 15px;">
+                                    <div style="font-weight: bold; color: #333; font-size: 15px; margin-bottom: 5px;">
+                                        @vagt.Dato.ToString("dddd d. MMM yyyy", new System.Globalization.CultureInfo("da-DK")).ToUpper()
+                                    </div>
+                                    <div style="color: #666; font-size: 14px; margin-bottom: 10px;">
+                                        🕒 @vagt.Dato.ToString("HH:mm") - @vagt.Dato.AddHours(4).ToString("HH:mm")
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        @if (vagt.Ædru)
+                                        {
+                                            <span class="badge badge-red">Ædru</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge badge-green">Ikke Ædru</span>
+                                        }
+                                        
+                                        <a asp-controller="Vagts" asp-action="Index" style="font-size: 13px; color: #3b82f6; text-decoration: none; font-weight: bold;">Gå til vagtplan →</a>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="shift-card" style="text-align: center; color: #666; padding: 30px;">
+                            <p>Du har ingen planlagte vagter.</p>
+                            <a asp-controller="Vagts" asp-action="Index" class="btn-take" style="background-color: #3b82f6; text-decoration: none; padding: 10px 20px; border-radius: 4px; color: white;">Tag en vagt</a>
+                        </div>
+                    }
+                </div>
+                
+            </div>
+            
+        </div>
+    </div>
 </div>

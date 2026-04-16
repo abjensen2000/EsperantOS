@@ -7,11 +7,14 @@
         private bool bestyrelsesmedlem;
         private List<Vagt> vagter;
 
+        public Medarbejder() { }
+
         public Medarbejder(int id, string name, bool bestyrelsesmedlem)
         {
             _id = id;
             _name = name;
             this.bestyrelsesmedlem = bestyrelsesmedlem;
+            vagter = new List<Vagt>();
         }
 
         public int Id { get => _id; set => _id = value; }

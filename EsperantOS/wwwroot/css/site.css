@@ -29,3 +29,207 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+
+/* Vagtplan stilarter (fra EsperantOS/css/site.css) */
+.vagtplan-modal {
+    max-width: 1000px;
+    margin: 40px auto;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+/* Lukkeknap i toppen */
+.modal-header {
+    text-align: right;
+    padding: 10px 15px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #333;
+}
+
+.modal-body {
+    display: flex;
+    min-height: 600px;
+}
+
+/* Venstre menu */
+.sidebar {
+    width: 150px;
+    padding: 20px 15px;
+    background-color: #fcfcfc;
+}
+
+.sidebar-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background: #fff;
+    border: 1px solid #d0d0d0;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+}
+
+.sidebar-btn.active {
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* Højre side */
+.main-content {
+    flex-grow: 1;
+    border-left: 1px solid #e0e0e0;
+}
+
+/* Dato faner */
+.date-tabs {
+    display: flex;
+    gap: 20px;
+    padding: 15px 25px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.tab {
+    padding: 6px 12px;
+    cursor: pointer;
+    color: #666;
+    font-size: 14px;
+}
+
+.tab.active {
+    background-color: #e6f0ff;
+    color: #333;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+/* Liste med vagter */
+.shift-list {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.shift-card {
+    border: 1px solid #d0d0d0;
+    border-radius: 6px;
+    padding: 15px 20px;
+    background: #fff;
+}
+
+.employee-name {
+    margin: 0 0 15px 0;
+    font-size: 18px;
+    font-weight: bold;
+    color: #000;
+}
+
+.shift-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.time-inputs {
+    display: flex;
+    gap: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 12px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.time-field {
+    display: flex;
+    align-items: center;
+    border: 1px solid #d0d0d0;
+    border-radius: 4px;
+    padding: 6px 10px;
+    background: #fff;
+}
+
+.time-field .icon {
+    color: #888;
+    margin-right: 8px;
+    font-size: 14px;
+}
+
+.time-field input {
+    border: none;
+    outline: none;
+    width: 60px;
+    font-size: 14px;
+    color: #333;
+}
+
+/* Handlinger (knapper og badges) i højre side af kortet */
+.actions {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.btn-release {
+    background-color: #3b82f6;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-release:hover {
+    background-color: #2563eb;
+}
+
+.btn-take {
+    background-color: #10b981;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-take:hover {
+    background-color: #059669;
+}
+
+/* Tags (Ædru / Ikke ædru) */
+.badge {
+    padding: 6px 16px;
+    border-radius: 20px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.badge-red {
+    background-color: #ef4444; /* Rød */
+}
+
+.badge-green {
+    background-color: #22c55e; /* Grøn */
+}
