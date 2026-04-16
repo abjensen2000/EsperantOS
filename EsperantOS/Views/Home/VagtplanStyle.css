@@ -1,0 +1,12 @@
+﻿.container {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* Creates 7 equal-width columns */
+    gap: 10px; /* Adds space between the days */
+}
+
+/* Optional: Add some style to the individual date boxes */
+.date {
+    border: 1px solid #ccc;
+    padding: 20px;
+    text-align: center;
+}

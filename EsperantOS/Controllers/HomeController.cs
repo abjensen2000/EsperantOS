@@ -14,17 +14,25 @@ namespace EsperantOS.Controllers
             this._context = context;
         }
 
+
         public IActionResult Index()
         {
-            //_context.Medarbejdere.Add(new Medarbejder(0, "Christian", false));
-            _context.SaveChanges();
             return View();
         }
 
-        public IActionResult Upvote()
+        [HttpGet]
+        public IActionResult Vagtplan()
         {
-            return Upvote();
+            return View();
         }
+
+        [HttpGet]
+        public IActionResult FrigivedeVagter()
+        {
+            return View();
+        }
+
+
 
 
     }

@@ -1,0 +1,23 @@
+﻿@page
+@model EsperantOS.Views.Home.FileNameModel
+@{
+    List<DateTime> dates = new List<DateTime>();
+    DateTime firstDate = DateTime.Now;
+    for (int i = 1; i <= 7; i++)
+    {
+        dates.Add(firstDate);
+        firstDate = firstDate.AddDays(1);
+    }
+}
+<link rel="stylesheet" href="VagtplanStyle.css">
+
+<p>Kalender her</p>
+<div class="container">
+    @foreach (DateTime date in dates)
+    {
+        <div class="date">
+            <!-- Formatted to look nicer -->
+            @date.ToString("dd. MMMM")
+        </div>
+    }
+</div>

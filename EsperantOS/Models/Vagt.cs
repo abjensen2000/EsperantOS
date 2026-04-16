@@ -6,7 +6,7 @@
         private DateTime _dato;
         private bool _ædru;
         private bool _frigivet;
-        private List<Medarbejder> _medarbejdere;
+        private List<Medarbejder> _medarbejdere = [];
 
         public Vagt(int id, DateTime dato, bool ædru, bool frigivet)
         {
@@ -15,6 +15,8 @@
             this._ædru = ædru;
             this._frigivet = frigivet;
         }
+
+        public Vagt() { }
 
         public int Id { get => _id; set => _id = value; }
         public DateTime Dato { get => _dato; set => _dato = value; }
