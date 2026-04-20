@@ -1,3 +1,6 @@
 <Solution>
+  <Project Path="BusinessLogic/BusinessLogic.csproj" Id="b2148fdb-5ffc-4e1f-aba3-4aad91027f25" />
+  <Project Path="DataAccess/DataAccess.csproj" Id="c3cfd9a6-7ed8-4c22-a87e-8ee2c33b5d0c" />
+  <Project Path="DTO/DTO.csproj" Id="070a7166-5db7-4b17-a5d6-10bd92784b83" />
   <Project Path="EsperantOS/EsperantOS.csproj" />
 </Solution>

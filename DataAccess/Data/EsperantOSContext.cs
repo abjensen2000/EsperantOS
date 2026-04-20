@@ -1,16 +1,22 @@
-﻿using EsperantOS.Models;
+﻿using DataAccess.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace EsperantOS.Data
 {
-    public class EsperantOSContext : DbContext
+    internal class EsperantOSContext : DbContext
     {
+
         public EsperantOSContext(DbContextOptions<EsperantOSContext> options) : base(options)
         {
             Database.EnsureCreated();
         }
+        public EsperantOSContext()
+        {
+            Database.EnsureCreated();
+        }
 
-        public DbSet<Vagt> Vagter{ get; set; } = null!;
+
+        public DbSet<Vagt> Vagter { get; set; } = null!;
 
         public DbSet<Medarbejder> Medarbejdere { get; set; } = null!;
 

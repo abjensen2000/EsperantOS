@@ -1,4 +1,8 @@
-﻿namespace EsperantOS.Models
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace DataAccess.Model
 {
     public class Medarbejder
     {
