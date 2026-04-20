@@ -25,7 +25,5 @@ namespace EsperantOS.Controllers
         {
             return Upvote();
         }
-
-
     }
 }

@@ -1,15 +1,34 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+<div style="display:grid; grid-template-columns:100px auto 30px; gap:5px; grid-template-rows:30px auto 30px; background-color:lightgray">
+    <div class="text-center" style="background-color:white; grid-column:2; grid-row:2">
+        <h1>VELKOMMEN TIL ESPERANTO!</h1>
 
-<div class="text-center">
+        <h4>BESTYRELSES INFORMATION</h4>
+        <textarea style="height:300px; width:700px; background-color:whitesmoke; border-radius:6px" readonly>
+            Her kommer der information fra bestyrelsen
+        </textarea>
 
-    <h1>FORSIDE</h1>
+        <form action="" method="get">
+            <input type="submit" name="upvote" value="Upvote" style="background-color:dodgerblue; color:white; width:700px; border-radius:6px; margin:10px" />
+        </form>
+        <div style="width:300px; height:100px ;background-color:whitesmoke; border-radius:6px; justify-self:center; margin:10px">
+            <h4>QUICK OVERSIGT</h4>
+        </div>
+    </div>
 
-
- 
-    <form action="" method="get">
-        <input type="submit" name="upvote" value="Upvote" />
-    </form>
-
+    <div style="grid-column:1; grid-row:2; justify-content:start; margin:0px" class="btn-group-vertical">
+        <button style="margin:4px; width:80px; border-radius:6px">
+            Forside
+        </button>
+        <button style="margin:4px; width:80px; border-radius:6px">
+            Vagtplan
+        </button>
+        <button style="margin:4px; width:80px; border-radius:6px">
+            Frigivede vagter
+        </button>
+    </div>
 </div>
+
+
