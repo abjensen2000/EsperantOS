@@ -11,4 +11,10 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.6" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj" />
+    <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
+    <ProjectReference Include="..\DTO\DTO.csproj" />
+  </ItemGroup>
+
 </Project>

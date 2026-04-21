@@ -1,23 +1,25 @@
-using EsperantOS.Data;
-using EsperantOS.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+
+
+
+using DataAccess.Repositories;
 
 namespace EsperantOS.Controllers
 {
     public class HomeController : Controller
     {
-        private EsperantOSContext _context;
+        private UnitOfWork _uow;
 
-        public HomeController(EsperantOSContext context)
+        public HomeController(UnitOfWork uow)
         {
-            this._context = context;
+            this._uow = uow;
         }
 
         public IActionResult Index()
         {
             //_context.Medarbejdere.Add(new Medarbejder(0, "Christian", false));
-            _context.SaveChanges();
+            _uow.Save();
             return View();
         }
 
