@@ -1,5 +1,6 @@
 ﻿using DataAccess.Model;
 using Microsoft.EntityFrameworkCore;
+using DataAccess.Utilities;
 
 namespace EsperantOS.Data
 {
@@ -30,10 +31,13 @@ namespace EsperantOS.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            // Seed testdata
+            // Seed testdata with hashed passwords using PBKDF2
+            // Password: "password123"
+            var passwordHash = PasswordHelper.HashPassword("password123");
+
             modelBuilder.Entity<Medarbejder>().HasData(
-                new Medarbejder(1, "Christian", true),
-                new Medarbejder(2, "Anders", false)
+                new Medarbejder(1, "Christian", true, passwordHash),
+                new Medarbejder(2, "Anders", false, passwordHash)
             );
         }
     }

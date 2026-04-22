@@ -8,11 +8,18 @@ builder.Services.AddControllersWithViews();
 //builder.Services.AddDbContext<EsperantOSContext>();
 builder.Services.AddScoped<UnitOfWork>();
 
+builder.Services.AddAuthentication("Cookies")
+    .AddCookie("Cookies", options =>
+    {
+        options.LoginPath = "/auth/login";
+        options.LogoutPath = "/auth/logout";
+    });
+
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("Bestyrelsesmedlem", policy =>
         policy.RequireClaim("ErBestyrelsesmedlem", "true"));
-    
+
     options.AddPolicy("Medarbejder", policy =>
         policy.RequireAuthenticatedUser());
 });
@@ -30,12 +37,10 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();
-
-app.UseAuthentication();
-app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
