@@ -4,6 +4,8 @@ using System.Diagnostics;
 
 
 using DataAccess.Repositories;
+using DataAccess.Model;
+using DTO.Model;
 
 namespace EsperantOS.Controllers
 {
@@ -25,7 +27,26 @@ namespace EsperantOS.Controllers
 
         public IActionResult Upvote()
         {
-            return Upvote();
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Vagtplan()
+        {
+            //VagtDTO vagt = new VagtDTO(0, DateTime.Now, false, false);
+            //vagt.Medarbejdere.Add(new MedarbejderDTO(0, "sammi", true));
+            //_uow.AddVagt(new VagtDTO(0, DateTime.Now, true, false));
+            //_uow.Save();
+            ViewBag.vagter = _uow.GetAllVagt();
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Vagtplan(int vagtId)
+        {
+            ViewBag.medarbejdere = _uow.GetVagt(vagtId).Medarbejdere;
+            return View();
         }
     }
 }

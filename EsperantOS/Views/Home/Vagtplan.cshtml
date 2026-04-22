@@ -1,0 +1,23 @@
+﻿@model DTO.Model.VagtDTO
+<div>
+    <div>
+        @{
+            foreach(DTO.Model.VagtDTO vagt in ViewBag.vagter)
+            {
+                <form action="/Home/Vagtplan" method="post">
+                    <button id="vagtId" type="submit">@vagt.Dato.ToString()</button>
+                </form>
+            }
+        }
+
+        @{
+            if (ViewBag.medarbejdere != null)
+            {
+                foreach (DTO.Model.MedarbejderDTO medarbejder in ViewBag.medarbejdere)
+                {
+                    <p>@medarbejder.Name</p>
+                }
+            }
+        }   
+    </div>
+</div>

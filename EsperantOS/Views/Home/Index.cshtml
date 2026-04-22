@@ -19,15 +19,15 @@
     </div>
 
     <div style="grid-column:1; grid-row:2; justify-content:start; margin:0px" class="btn-group-vertical">
-        <button style="margin:4px; width:80px; border-radius:6px">
-            Forside
-        </button>
-        <button style="margin:4px; width:80px; border-radius:6px">
-            Vagtplan
-        </button>
-        <button style="margin:4px; width:80px; border-radius:6px">
-            Frigivede vagter
-        </button>
+        <form asp-action="Index" method="get">
+            <button type="submit" style="margin:4px; width:80px; border-radius:6px">Forside</button>
+        </form>
+        <form asp-action="Vagtplan" method="get">
+            <button type="submit" style="margin:4px; width:80px; border-radius:6px">Vagtplan</button>
+        </form>
+        <form asp-action="FrigivedeVagter" method="get">
+            <button type="submit" style="margin:4px; width:80px; border-radius:6px">Frigivede vagter</button>
+        </form>
     </div>
 </div>
 

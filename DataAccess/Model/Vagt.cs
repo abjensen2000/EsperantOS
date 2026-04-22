@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DataAccess.Model
 {
-    public class Vagt
+    internal class Vagt
     {
         private int _id;
         private DateTime _dato;

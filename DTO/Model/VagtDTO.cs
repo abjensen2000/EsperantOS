@@ -12,6 +12,7 @@ namespace DTO.Model
         private bool _frigivet;
         private List<MedarbejderDTO> _medarbejdere;
 
+        public VagtDTO() { }
         public VagtDTO(int id, DateTime dato, bool ædru, bool frigivet)
         {
             this._id = id;
