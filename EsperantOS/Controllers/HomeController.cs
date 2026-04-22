@@ -4,9 +4,11 @@ using System.Diagnostics;
 
 
 using DataAccess.Repositories;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EsperantOS.Controllers
 {
+    [Authorize(Policy = "Bestyrelsesmedlem")]
     public class HomeController : Controller
     {
         private UnitOfWork _uow;
@@ -16,6 +18,7 @@ namespace EsperantOS.Controllers
             this._uow = uow;
         }
 
+        [AllowAnonymous]
         public IActionResult Index()
         {
             //_context.Medarbejdere.Add(new Medarbejder(0, "Christian", false));

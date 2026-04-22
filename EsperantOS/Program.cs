@@ -8,6 +8,14 @@ builder.Services.AddControllersWithViews();
 //builder.Services.AddDbContext<EsperantOSContext>();
 builder.Services.AddScoped<UnitOfWork>();
 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("Bestyrelsesmedlem", policy =>
+        policy.RequireClaim("ErBestyrelsesmedlem", "true"));
+    
+    options.AddPolicy("Medarbejder", policy =>
+        policy.RequireAuthenticatedUser());
+});
 
 var app = builder.Build();
 
@@ -25,6 +33,9 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapStaticAssets();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
