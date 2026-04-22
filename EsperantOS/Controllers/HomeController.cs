@@ -4,11 +4,13 @@ using System.Diagnostics;
 
 
 using DataAccess.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using DataAccess.Model;
 using DTO.Model;
 
 namespace EsperantOS.Controllers
 {
+    [Authorize(Policy = "Bestyrelsesmedlem")]
     public class HomeController : Controller
     {
         private UnitOfWork _uow;
@@ -18,6 +20,7 @@ namespace EsperantOS.Controllers
             this._uow = uow;
         }
 
+        [AllowAnonymous]
         public IActionResult Index()
         {
             //_context.Medarbejdere.Add(new Medarbejder(0, "Christian", false));
@@ -33,8 +36,8 @@ namespace EsperantOS.Controllers
         [HttpGet]
         public IActionResult Vagtplan()
         {
-            //VagtDTO vagt = new VagtDTO(0, DateTime.Now, false, false);
-            //vagt.Medarbejdere.Add(new MedarbejderDTO(0, "sammi", true));
+            VagtDTO vagt = _uow.GetVagt(1);
+            vagt.Medarbejdere.Add()
             //_uow.AddVagt(new VagtDTO(0, DateTime.Now, true, false));
             //_uow.Save();
             ViewBag.vagter = _uow.GetAllVagt();

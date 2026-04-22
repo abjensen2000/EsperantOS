@@ -10,7 +10,7 @@ namespace DataAccess.Mappers
     {
         public static MedarbejderDTO medarbejderTilDTO(Medarbejder medarbejder)
         {
-            return new MedarbejderDTO(medarbejder.Id, medarbejder.Name, medarbejder.Bestyrelsesmedlem);
+            return new MedarbejderDTO(medarbejder.Id, medarbejder.Name, medarbejder.Bestyrelsesmedlem, medarbejder.PasswordHash);
         }
 
         public static List<MedarbejderDTO> medarbejdereTilDTO(List<Medarbejder> medarbejdere)
@@ -26,7 +26,7 @@ namespace DataAccess.Mappers
 
         public static Medarbejder DTOTilMedarbejder(MedarbejderDTO medarbejder)
         {
-            return new Medarbejder(medarbejder.Id, medarbejder.Name, medarbejder.Bestyrelsesmedlem);
+            return new Medarbejder(medarbejder.Id, medarbejder.Name, medarbejder.Bestyrelsesmedlem, medarbejder.PasswordHash);
         }
 
         public static List<Medarbejder> DTOTilMedarbejdere(List<MedarbejderDTO> dtoMedarbejdere)

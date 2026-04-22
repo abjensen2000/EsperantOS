@@ -32,6 +32,11 @@ namespace DataAccess.Repositories
             return _medarbejdere.GetAllMedarbejder();
         }
 
+        public IEnumerable<DataAccess.Model.Medarbejder> GetMedarbejdere()
+        {
+            return _context.Medarbejdere;
+        }
+
         public void AddMedarbejder(MedarbejderDTO medarbejderDTO)
         {
             _medarbejdere.AddMedarbejder(medarbejderDTO);
@@ -58,29 +63,30 @@ namespace DataAccess.Repositories
             _vagter.AddVagt(vagtDTO);
         }
 
+        public VagtDTO GetVagtMedMedarbejdere(int vagtId)
+        {
+            return _vagter.GetVagtMedMedarbejdere(vagtId);  // ← Med medarbejdere
+        }
+
+        public List<VagtDTO> GetAllVagtMedMedarbejdere()
+        {
+            return _vagter.GetAllVagtMedMedarbejdere();  // ← Alle med medarbejdere
+        }
+
+        public void AddMedarbejderToVagt(int vagtId, int medarbejderId)
+        {
+            _vagter.AddMedarbejderToVagt(vagtId, medarbejderId);
+        }
+
+        public void RemoveMedarbejderFromVagt(int vagtId, int medarbejderId)
+        {
+            _vagter.RemoveMedarbejderFromVagt(vagtId, medarbejderId);
+        }
+
         public void DeleteVagt(int vagtId)
         {
             _vagter.DeleteVagt(vagtId);
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         public void Save()
         {
