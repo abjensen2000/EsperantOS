@@ -22,6 +22,9 @@ namespace DataAccess.Repositories
             _vagter = new VagtRepository(_context);
         }
 
+        public List<MedarbejderDTO> GetMedarbejdereInVagt(VagtDTO vagt) {
+            return _vagter.GetMedarbejdereInVagt(vagt);
+        }
         public MedarbejderDTO GetMedarbejder(int medarbejderId)
         {
             return _medarbejdere.GetMedarbejder(medarbejderId);
@@ -48,6 +51,8 @@ namespace DataAccess.Repositories
         }
 
         //_______--__----___-
+
+
         public VagtDTO GetVagt(int vagtId)
         {
             return _vagter.GetVagt(vagtId);

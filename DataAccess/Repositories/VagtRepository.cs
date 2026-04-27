@@ -1,6 +1,7 @@
 ﻿using DataAccess.Mappers;
 using DTO.Model;
 using EsperantOS.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,6 +15,16 @@ namespace DataAccess.Repositories
         public VagtRepository(EsperantOSContext context)
         {
             _context = context;
+        }
+
+        public List<MedarbejderDTO> GetMedarbejdereInVagt(VagtDTO vagt) {
+            var foundVagt = _context.Vagter.Include((i) => i.Medarbejdere).FirstOrDefault((i) => i.Id == vagt.Id);
+
+            if (foundVagt == null) {
+                return new List<MedarbejderDTO>();
+            }
+
+            return MedarbejderMapper.medarbejdereTilDTO(foundVagt.Medarbejdere);
         }
 
         public VagtDTO GetVagt(int vagtId)
