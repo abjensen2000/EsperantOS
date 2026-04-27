@@ -36,8 +36,6 @@ namespace EsperantOS.Controllers
         [HttpGet]
         public IActionResult Vagtplan()
         {
-            VagtDTO vagt = _uow.GetVagt(1);
-            vagt.Medarbejdere.Add()
             //_uow.AddVagt(new VagtDTO(0, DateTime.Now, true, false));
             //_uow.Save();
             ViewBag.vagter = _uow.GetAllVagt();
