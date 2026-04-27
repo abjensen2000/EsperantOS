@@ -33,20 +33,26 @@ namespace EsperantOS.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         [HttpGet]
-        public IActionResult Vagtplan()
+        public IActionResult Vagtplan(int? selectedVagtId)
         {
-            //_uow.AddVagt(new VagtDTO(0, DateTime.Now, true, false));
-            //_uow.Save();
-            ViewBag.vagter = _uow.GetAllVagt();
+            var vagter = _uow.GetAllVagt();
+            ViewBag.vagter = vagter;
 
-            return View();
-        }
+            ViewBag.medarbejdere = new List<MedarbejderDTO>();
 
-        [HttpPost]
-        public async Task<IActionResult> Vagtplan(int vagtId)
-        {
-            ViewBag.medarbejdere = _uow.GetVagt(vagtId).Medarbejdere;
+            if (selectedVagtId.HasValue)
+            {
+                var vagt = _uow.GetVagt(selectedVagtId.Value);
+                if( vagt != null )
+                {
+                    ViewBag.medarbejdere = vagt.Medarbejdere;
+                }
+            }
+
+            ViewBag.alleMedarbejdere = _uow.GetAllMedarbejder();
+
             return View();
         }
     }

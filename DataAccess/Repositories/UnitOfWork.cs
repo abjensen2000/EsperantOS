@@ -63,6 +63,8 @@ namespace DataAccess.Repositories
             _vagter.AddVagt(vagtDTO);
         }
 
+
+
         public VagtDTO GetVagtMedMedarbejdere(int vagtId)
         {
             return _vagter.GetVagtMedMedarbejdere(vagtId);  // ← Med medarbejdere

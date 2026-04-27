@@ -1,23 +1,55 @@
-﻿@model DTO.Model.VagtDTO
+﻿@using DTO.Model
 <div>
     <div>
         @{
-            foreach(DTO.Model.VagtDTO vagt in ViewBag.vagter)
+            foreach(VagtDTO vagt in ViewBag.vagter)
             {
-                <form action="/Home/Vagtplan" method="post">
+                <form action="/Home/Vagtplan" method="get">
+                    <input type="hidden" name="selectedVagt" value="@vagt.Id" />
                     <button id="vagtId" type="submit">@vagt.Dato.ToString()</button>
                 </form>
             }
         }
 
-        @{
-            if (ViewBag.medarbejdere != null)
-            {
-                foreach (DTO.Model.MedarbejderDTO medarbejder in ViewBag.medarbejdere)
+        <ul>
+            @{
+                foreach (MedarbejderDTO medarbejder in ViewBag.medarbejdere)
                 {
-                    <p>@medarbejder.Name</p>
+                    <li>@medarbejder.Name</li>
                 }
             }
-        }   
+        </ul>
+
+        <!-- Trigger Button -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addMedarbejder">
+            Tilføj Medarbejder
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="addMedarbejder" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Vælg Medarbejder</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Vælg en medarbejder fra listen</p>
+                        <select>
+                            @{
+                                foreach (MedarbejderDTO medarbejder in ViewBag.alleMedarbejdere)
+                                {
+                                    <option value="@medarbejder.Id">@medarbejder.Name</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuller</button>
+                        <button type="button" class="btn btn-primary">Gem</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
