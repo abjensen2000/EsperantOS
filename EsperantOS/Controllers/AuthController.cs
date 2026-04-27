@@ -27,7 +27,7 @@ namespace EsperantOS.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(string username, string password)
         {
-            var medarbejder = _uow.GetMedarbejdere()
+            var medarbejder = _uow.GetMedarbejdereForLogin()
                 .FirstOrDefault(m => m.Name.ToLower() == username.ToLower());
 
             if (medarbejder == null || !PasswordHelper.VerifyPassword(password, medarbejder.PasswordHash))
