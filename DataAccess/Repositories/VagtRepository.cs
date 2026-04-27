@@ -17,6 +17,16 @@ namespace DataAccess.Repositories
             _context = context;
         }
 
+        public List<MedarbejderDTO> GetMedarbejdereInVagt(VagtDTO vagt) {
+            var foundVagt = _context.Vagter.Include((i) => i.Medarbejdere).FirstOrDefault((i) => i.Id == vagt.Id);
+
+            if (foundVagt == null) {
+                return new List<MedarbejderDTO>();
+            }
+
+            return MedarbejderMapper.medarbejdereTilDTO(foundVagt.Medarbejdere);
+        }
+
         public VagtDTO GetVagt(int vagtId)
         {
             return VagtMapper.vagtTilDTO(_context.Vagter.Find(vagtId));
