@@ -32,9 +32,9 @@ namespace DataAccess.Repositories
             return _medarbejdere.GetAllMedarbejder();
         }
 
-        public IEnumerable<DataAccess.Model.Medarbejder> GetMedarbejdere()
+        public List<MedarbejderDTO> GetMedarbejdereForLogin()
         {
-            return _context.Medarbejdere;
+            return _medarbejdere.GetAllMedarbejder();
         }
 
         public void AddMedarbejder(MedarbejderDTO medarbejderDTO)
