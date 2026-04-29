@@ -1,9 +1,8 @@
 using Microsoft.AspNetCore.Authorization;
-using EsperantOS.Data;
+using EsperantOS.BusinessLogic;
 using EsperantOS.Models;
+using EsperantOS.Extensions;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Diagnostics;
 using System.Linq;
 
 namespace EsperantOS.Controllers
@@ -11,23 +10,24 @@ namespace EsperantOS.Controllers
     [Authorize]
     public class HomeController : Controller
     {
-        private readonly EsperantOSContext _context;
+        private readonly VagtBLL _vagtBLL;
+        private readonly MedarbejderBLL _medarbejderBLL;
 
-        public HomeController(EsperantOSContext context)
+        public HomeController(VagtBLL vagtBLL, MedarbejderBLL medarbejderBLL)
         {
-            this._context = context;
+            _vagtBLL = vagtBLL;
+            _medarbejderBLL = medarbejderBLL;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             var currentUser = User.Identity?.Name ?? "Ukendt";
 
-            // Vi simulerer "currentUser's" vagter
-            var mineVagter = _context.Vagter
-                .Include(v => v.Medarbejdere)
-                .Where(v => v.Medarbejdere.Any(m => m.Name == currentUser))
-                .OrderBy(v => v.Dato)
-                .ToList();
+            // Hent currentUser's vagter fra BLL
+            var mineVagterDto = await _vagtBLL.GetVagterByMedarbejderNameAsync(currentUser);
+
+            // Konvertér DTOs til Models ved hjælp af extension method
+            var mineVagter = mineVagterDto.ToModelList().OrderBy(v => v.Dato).ToList();
 
             var viewModel = new HomeViewModel
             {
@@ -35,13 +35,9 @@ namespace EsperantOS.Controllers
                 BestyrelsesBesked = "Husk at tjekke frigivede vagter. Vi mangler folk til fredagsbaren d. 25.!",
                 MineVagter = mineVagter
             };
-            
-            return View(viewModel);
-        }
 
-        public IActionResult Upvote()
-        {
-            return View(); // Midlertidig fiks så det ikke kalder sig selv uendeligt
+            return View(viewModel);
         }
     }
 }
+

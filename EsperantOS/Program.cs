@@ -1,5 +1,6 @@
 using EsperantOS.Data;
-
+using EsperantOS.DataAccess.UnitOfWork;
+using EsperantOS.BusinessLogic;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +8,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<EsperantOSContext>();
+
+// Register UnitOfWork and Business Logic Layer
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<VagtBLL>();
+builder.Services.AddScoped<MedarbejderBLL>();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
