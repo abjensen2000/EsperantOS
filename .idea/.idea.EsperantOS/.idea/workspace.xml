@@ -8,7 +8,30 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f39d2630-7671-4300-9c47-a6b8c2ce4b17" name="Changes" comment="" />
+    <list default="true" id="f39d2630-7671-4300-9c47-a6b8c2ce4b17" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/EsperantOS/BusinessLogic/MedarbejderBLL.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS/BusinessLogic/MedarbejderBLL.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EsperantOS/BusinessLogic/VagtBLL.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS/BusinessLogic/VagtBLL.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EsperantOS/Controllers/AccountController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS/Controllers/AccountController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EsperantOS/Controllers/HomeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS/Controllers/HomeController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EsperantOS/Controllers/VagtsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS/Controllers/VagtsController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EsperantOS/DTO/Model/MedarbejderDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS/DTO/Model/MedarbejderDTO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EsperantOS/DTO/Model/VagtDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS/DTO/Model/VagtDTO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EsperantOS/DataAccess/Context/EsperantOSContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS/DataAccess/Context/EsperantOSContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EsperantOS/DataAccess/Mappers/MedarbejderMapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS/DataAccess/Mappers/MedarbejderMapper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EsperantOS/DataAccess/Mappers/VagtMapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS/DataAccess/Mappers/VagtMapper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EsperantOS/DataAccess/Repositories/IRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS/DataAccess/Repositories/IRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EsperantOS/DataAccess/Repositories/MedarbejderRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS/DataAccess/Repositories/MedarbejderRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EsperantOS/DataAccess/Repositories/Repository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS/DataAccess/Repositories/Repository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EsperantOS/DataAccess/Repositories/VagtRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS/DataAccess/Repositories/VagtRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EsperantOS/DataAccess/UnitOfWork/IUnitOfWork.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS/DataAccess/UnitOfWork/IUnitOfWork.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EsperantOS/DataAccess/UnitOfWork/UnitOfWork.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS/DataAccess/UnitOfWork/UnitOfWork.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EsperantOS/Helpers/VagtHelpers.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS/Helpers/VagtHelpers.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EsperantOS/Models/ErrorViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS/Models/ErrorViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EsperantOS/Models/HomeViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS/Models/HomeViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EsperantOS/Models/LoginViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS/Models/LoginViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EsperantOS/Models/Medarbejder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS/Models/Medarbejder.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EsperantOS/Models/Vagt.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS/Models/Vagt.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
