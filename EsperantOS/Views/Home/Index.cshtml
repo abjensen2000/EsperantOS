@@ -1,73 +1,67 @@
 @model EsperantOS.Models.HomeViewModel
+
 @{
     ViewData["Title"] = "Forside";
 }
 
-<div class="vagtplan-modal">
-    <div class="modal-header">
-        <span class="header-user">👤 Logget ind som: @User.Identity?.Name</span>
-        <a asp-controller="Account" asp-action="Logout" class="header-logout">Log ud</a>
+<div class="shell">
+    <div class="topbar">
+        <span class="topbar-user">@User.Identity?.Name</span>
+        <a asp-controller="Account" asp-action="Logout" class="topbar-logout">Log ud</a>
     </div>
 
-    <div class="modal-body">
-        <div class="sidebar">
-            <button class="sidebar-btn active" data-view="forside">Forside</button>
-            <a asp-controller="Vagts" asp-action="Index" asp-route-view="vagtplan" class="sidebar-btn">Vagtplan</a>
-            <a asp-controller="Vagts" asp-action="Index" asp-route-view="frigivede" class="sidebar-btn">Frigivede vagter</a>
-        </div>
+    <div class="shell-body">
+        <nav class="sidebar">
+            <button class="nav-btn active" data-view="forside">Forside</button>
+            <a asp-controller="Vagts" asp-action="Index" asp-route-view="vagtplan" class="nav-btn">Vagtplan</a>
+            <a asp-controller="Vagts" asp-action="Index" asp-route-view="frigivede" class="nav-btn">Frigivede vagter</a>
+        </nav>
 
-        <div class="main-content main-content-padded-lg">
-            <h1 class="dashboard-title">EsperantOS Dashboard</h1>
+        <div class="main main-pad">
+            <h1 class="page-title">Dashboard</h1>
 
-            <div class="dashboard-flex">
+            <div class="dashboard-grid">
 
-                <!-- Information Board (Bestyrelsen) -->
-                <div class="dashboard-col">
-                    <div class="shift-card shift-card-board">
-                        <h3 class="board-title">📢 Beskeder fra bestyrelsen</h3>
-                        <p class="board-text">@Model.BestyrelsesBesked</p>
-                        <div class="board-footer">
-                            <button class="board-admin-btn">Rediger besked (Admin)</button>
-                        </div>
+                <div>
+                    <div class="notice-card">
+                        <p class="notice-title">Beskeder fra bestyrelsen</p>
+                        <p class="notice-text">@Model.BestyrelsesBesked</p>
                     </div>
                 </div>
 
-                <!-- Quick Info: Egne vagter -->
-                <div class="dashboard-col">
-                    <h3 class="section-title">📅 Mine kommende vagter</h3>
+                <div>
+                    <p class="section-title">Mine kommende vagter</p>
 
-                    @if (Model.MineVagter != null && Model.MineVagter.Any())
+                    @if (Model.MineVagter != null && Model.MineVagter.Any(v => !v.Frigivet))
                     {
-                        <div class="vagter-list">
-                            @foreach (var vagt in Model.MineVagter.Where(v => !v.Frigivet).Take(3))
-                            {
-                                <div class="shift-card">
-                                    <div class="shift-card-date">
-                                        @vagt.Dato.ToString("dddd d. MMM yyyy", new System.Globalization.CultureInfo("da-DK")).ToUpper()
-                                    </div>
-                                    <div class="shift-card-time">
-                                        🕒 @vagt.Dato.ToString("HH:mm") - @vagt.Dato.AddHours(4).ToString("HH:mm")
-                                    </div>
-                                    <div class="shift-card-row">
-                                        @if (vagt.Ædru)
-                                        {
-                                            <span class="badge badge-red">Ædru</span>
-                                        }
-                                        else
-                                        {
-                                            <span class="badge badge-green">Ikke Ædru</span>
-                                        }
-                                        <a asp-controller="Vagts" asp-action="Index" class="shift-card-link">Gå til vagtplan →</a>
-                                    </div>
+                        @foreach (var vagt in Model.MineVagter.Where(v => !v.Frigivet).Take(3))
+                        {
+                            <div class="shift-mini">
+                                <div class="shift-mini-date">
+                                    @vagt.Dato.ToString("dddd d. MMM yyyy", new System.Globalization.CultureInfo("da-DK"))
                                 </div>
-                            }
-                        </div>
+                                <div class="shift-mini-time">
+                                    @vagt.Dato.ToString("HH:mm") – @vagt.Dato.AddHours(4).ToString("HH:mm")
+                                </div>
+                                <div class="shift-mini-row">
+                                    @if (vagt.Ædru)
+                                    {
+                                        <span class="badge badge-red">Ædru</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-green">Ikke ædru</span>
+                                    }
+                                    <a asp-controller="Vagts" asp-action="Index" class="link">Gå til vagtplan →</a>
+                                </div>
+                            </div>
+                        }
                     }
                     else
                     {
                         <div class="shift-card shift-card-empty">
                             <p>Du har ingen planlagte vagter.</p>
-                            <a asp-controller="Vagts" asp-action="Index" class="btn-release">Tag en vagt</a>
+                            <a asp-controller="Vagts" asp-action="Index" asp-route-view="frigivede" class="btn btn-primary">Tag en vagt</a>
                         </div>
                     }
                 </div>

@@ -5,28 +5,31 @@
     var firstDate = dates.FirstOrDefault();
 }
 
-<div class="vagtplan-modal">
-    <div class="modal-header">
-        <span class="header-user">👤 Logget ind som: @User.Identity?.Name</span>
-        <a asp-controller="Account" asp-action="Logout" class="header-logout">Log ud</a>
+<div class="shell">
+    <div class="topbar">
+        <span class="topbar-user">@User.Identity?.Name</span>
+        <a asp-controller="Account" asp-action="Logout" class="topbar-logout">Log ud</a>
     </div>
 
-    <div class="modal-body">
-        <div class="sidebar">
-            <a asp-controller="Home" asp-action="Index" class="sidebar-btn">Forside</a>
-            <button class="sidebar-btn active" data-view="vagtplan">Vagtplan</button>
-            <button class="sidebar-btn" data-view="frigivede">Frigivede vagter</button>
+    <div class="shell-body">
+        <nav class="sidebar">
+            <a asp-controller="Home" asp-action="Index" class="nav-btn">Forside</a>
+            <button class="nav-btn active" data-view="vagtplan">Vagtplan</button>
+            <button class="nav-btn" data-view="frigivede">Frigivede vagter</button>
             @if (User.IsInRole("Admin"))
             {
-                <a asp-action="Create" class="sidebar-btn sidebar-btn-primary">+ Opret Vagt</a>
+                <a asp-action="Create" class="nav-btn nav-btn-primary">+ Opret vagt</a>
             }
-        </div>
+        </nav>
 
-        <div class="main-content">
+        <div class="main">
             <div class="date-tabs" id="dateTabs">
                 @foreach (var date in dates)
                 {
-                    <span class="tab @(date == firstDate ? "active" : "")" data-date="@date.ToString("yyyy-MM-dd")">@date.ToString("d/M-yyyy")</span>
+                    <span class="tab @(date == firstDate ? "active" : "")"
+                          data-date="@date.ToString("yyyy-MM-dd")">
+                        @date.ToString("d/M")
+                    </span>
                 }
             </div>
 
@@ -34,74 +37,64 @@
                 @foreach (var date in dates)
                 {
                     var shiftsOnDate = Model.Where(v => v.Dato.Date == date).ToList();
-                    <div class="shift-list" data-date-content="@date.ToString("yyyy-MM-dd")" style="display: @(date == firstDate ? "flex" : "none");">
+                    <div class="shift-list"
+                         data-date-content="@date.ToString("yyyy-MM-dd")"
+                         style="display: @(date == firstDate ? "flex" : "none");">
+
                         @foreach (var shift in shiftsOnDate)
                         {
-                            var medarbejderNames = shift.Medarbejdere != null && shift.Medarbejdere.Any()
+                            var names = shift.Medarbejdere != null && shift.Medarbejdere.Any()
                                 ? string.Join(", ", shift.Medarbejdere.Select(m => m.Name))
                                 : "Ingen medarbejder";
 
-                            <div class="shift-card" data-frigivet="@shift.Frigivet.ToString().ToLower()">
-                                <h3 class="employee-name">
-                                    @if (shift.Frigivet)
+                            <div class="shift-card @(shift.Frigivet ? "shift-card-released" : "")"
+                                 data-frigivet="@shift.Frigivet.ToString().ToLower()">
+
+                                <div>
+                                    <div class="shift-date-label">@shift.Dato.ToString("d. MMMM yyyy")</div>
+                                    <p class="shift-name">
+                                        @if (shift.Frigivet)
+                                        {
+                                            <span>Fri vagt</span>
+                                            <span class="shift-released-tag">(@names)</span>
+                                        }
+                                        else
+                                        {
+                                            <span>@names</span>
+                                        }
+                                    </p>
+                                    <p class="shift-time">
+                                        @shift.Dato.ToString("HH:mm") – @shift.Dato.AddHours(4).ToString("HH:mm")
+                                    </p>
+                                </div>
+
+                                <div class="shift-right">
+                                    @if (shift.Ædru)
                                     {
-                                        <span>Fri vagt</span>
-                                        <span class="released-name">(@medarbejderNames)</span>
+                                        <span class="badge badge-red">Ædru</span>
                                     }
                                     else
                                     {
-                                        <span>@medarbejderNames</span>
+                                        <span class="badge badge-green">Ikke ædru</span>
                                     }
-                                </h3>
-                                <div class="shift-date-label">
-                                    Dato: @shift.Dato.ToString("d. MMMM yyyy")
-                                </div>
-                                <div class="shift-details">
-                                    <div class="time-inputs">
-                                        <div class="time-input-group">
-                                            <label class="time-input-label">FRA</label>
-                                            <div class="time-field-styled">
-                                                <span class="icon">🕒</span>
-                                                <input type="text" value="@shift.Dato.ToString("HH:mm")" readonly class="time-field-input" />
-                                            </div>
-                                        </div>
-                                        <div class="time-separator">━</div>
-                                        <div class="time-input-group">
-                                            <label class="time-input-label">TIL</label>
-                                            <div class="time-field-styled">
-                                                <span class="icon">🕒</span>
-                                                <input type="text" value="@shift.Dato.AddHours(4).ToString("HH:mm")" readonly class="time-field-input" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="actions">
-                                        @if (User.IsInRole("Admin"))
-                                        {
-                                            <a asp-action="Edit" asp-route-id="@shift.Id" class="action-edit" title="Rediger">✏️</a>
-                                            <a asp-action="Delete" asp-route-id="@shift.Id" class="action-delete" title="Slet">🗑️</a>
-                                        }
 
-                                        @if (!shift.Frigivet)
+                                    @if (!shift.Frigivet)
+                                    {
+                                        if (shift.Medarbejdere != null && shift.Medarbejdere.Any(m => m.Name == User.Identity.Name) || User.IsInRole("Admin"))
                                         {
-                                            if (shift.Medarbejdere != null && shift.Medarbejdere.Any(m => m.Name == User.Identity.Name) || User.IsInRole("Admin"))
-                                            {
-                                                <button class="btn-release" data-id="@shift.Id">Frigiv vagt</button>
-                                            }
+                                            <button class="btn btn-release" data-id="@shift.Id">Frigiv</button>
                                         }
-                                        else
-                                        {
-                                            <button class="btn-take" data-id="@shift.Id">Tag vagt</button>
-                                        }
+                                    }
+                                    else
+                                    {
+                                        <button class="btn btn-take" data-id="@shift.Id">Tag vagt</button>
+                                    }
 
-                                        @if (shift.Ædru)
-                                        {
-                                            <span class="badge badge-red">Ædru</span>
-                                        }
-                                        else
-                                        {
-                                            <span class="badge badge-green">Ikke Ædru</span>
-                                        }
-                                    </div>
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <a asp-action="Edit" asp-route-id="@shift.Id" class="btn-icon" title="Rediger">✏</a>
+                                        <a asp-action="Delete" asp-route-id="@shift.Id" class="btn-icon" title="Slet">✕</a>
+                                    }
                                 </div>
                             </div>
                         }

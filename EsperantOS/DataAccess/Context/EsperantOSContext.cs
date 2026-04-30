@@ -17,7 +17,7 @@ namespace EsperantOS.DataAccess.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=EsperantOS;Integrated Security=True;Trust Server Certificate=True");
+            optionsBuilder.UseSqlite("Data Source=EsperantOS.db");
         }
     }
 }

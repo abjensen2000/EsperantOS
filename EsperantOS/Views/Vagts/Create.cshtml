@@ -4,68 +4,50 @@
     ViewData["Title"] = "Opret Vagt";
 }
 
-<div class="vagtplan-modal">
-    <div class="modal-header">
-        <a asp-action="Index" class="close-btn">&times;</a>
+<div class="shell">
+    <div class="topbar">
+        <span class="topbar-user">@User.Identity?.Name</span>
+        <a asp-controller="Account" asp-action="Logout" class="topbar-logout">Log ud</a>
     </div>
 
-    <div class="modal-body">
-        <div class="sidebar">
-            <a asp-action="Index" class="sidebar-btn">Vagtplan</a>
-            <button class="sidebar-btn active">Opret Vagt (Admin)</button>
-        </div>
+    <div class="shell-body">
+        <nav class="sidebar">
+            <a asp-action="Index" class="nav-btn">Vagtplan</a>
+            <button class="nav-btn active">Opret vagt</button>
+        </nav>
 
-        <div class="main-content main-content-padded">
-            <h2 class="page-title">Opret Ny Vagt</h2>
+        <div class="main main-pad">
+            <h2 class="page-title">Opret ny vagt</h2>
 
-            <div class="shift-card shift-card-form">
-                <form asp-action="Create">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger" style="margin-bottom:12px;font-size:13px;"></div>
 
-                    <h3 class="form-title">Ny Vagt Opsætning</h3>
-
-                    <div class="shift-details shift-details-wrap">
-
-                        <div class="time-inputs">
-                            <div class="time-input-group">
-                                <label class="time-input-label">DATO</label>
-                                <div class="time-field-styled">
-                                    <span class="icon">📅</span>
-                                    <select name="SelectedDate" asp-items="ViewBag.UpcomingFridays" class="select-field"></select>
-                                </div>
-                            </div>
-
-                            <div class="time-separator">━</div>
-
-                            <div class="time-input-group">
-                                <label class="time-input-label">TID</label>
-                                <div class="time-field-styled">
-                                    <span class="icon">🕒</span>
-                                    <select name="SelectedTime" asp-items="ViewBag.Times" class="select-field"></select>
-                                </div>
-                            </div>
-
-                            <span asp-validation-for="Dato" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-actions">
-                            <div class="checkbox-stack">
-                                <div class="checkbox-row">
-                                    <input class="form-check-input checkbox-input" asp-for="Ædru" />
-                                    <label class="checkbox-label">KRÆVER ÆDRU</label>
-                                </div>
-                                <div class="checkbox-row">
-                                    <input class="form-check-input checkbox-input" asp-for="Frigivet" />
-                                    <label class="checkbox-label">ER FRIGIVET (LEDIG)</label>
-                                </div>
-                            </div>
-
-                            <button type="submit" class="btn-primary-action">Opret Vagt</button>
-                        </div>
-
+                <div class="field-row">
+                    <div class="field">
+                        <label>Dato</label>
+                        <select name="SelectedDate" asp-items="ViewBag.UpcomingFridays"></select>
+                        <span asp-validation-for="Dato" class="text-danger"></span>
                     </div>
-                </form>
-            </div>
+                    <div class="field">
+                        <label>Tidspunkt</label>
+                        <select name="SelectedTime" asp-items="ViewBag.Times"></select>
+                    </div>
+                </div>
+
+                <div class="checkbox-row">
+                    <input asp-for="Ædru" type="checkbox" />
+                    <label asp-for="Ædru">Kræver ædru</label>
+                </div>
+                <div class="checkbox-row">
+                    <input asp-for="Frigivet" type="checkbox" />
+                    <label asp-for="Frigivet">Frigivet (ledig)</label>
+                </div>
+
+                <div class="form-actions" style="margin-top:20px;">
+                    <button type="submit" class="btn btn-primary">Opret vagt</button>
+                    <a asp-action="Index" class="btn btn-secondary">Annuller</a>
+                </div>
+            </form>
         </div>
     </div>
 </div>

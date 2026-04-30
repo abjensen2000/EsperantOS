@@ -1,17 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Lukkeknap
-    const closeBtn = document.querySelector('.close-btn');
-    if (closeBtn) {
-        closeBtn.addEventListener('click', () => {
-            document.querySelector('.vagtplan-modal').style.display = 'none';
-        });
-    }
+    const urlParams = new URLSearchParams(window.location.search);
+    let currentView = urlParams.get('view') || 'vagtplan';
+    let selectedDate = document.querySelector('#dateTabs .tab.active')?.getAttribute('data-date') || '';
 
-    // Gennemgå data logic for date tabs og sidebar
-    let urlParams = new URLSearchParams(window.location.search);
-    let currentView = urlParams.get('view') || 'vagtplan'; // vagtplan or frigivede
-    let selectedDate = document.querySelector('.date-tabs .tab.active')?.getAttribute('data-date') || '';
-
+    // Date tab clicks
     const dateTabsContainer = document.getElementById('dateTabs');
     if (dateTabsContainer) {
         dateTabsContainer.addEventListener('click', (e) => {
@@ -24,18 +16,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    const sidebarBtns = document.querySelectorAll('.sidebar-btn');
-    sidebarBtns.forEach(btn => {
-        if (btn.getAttribute('data-view') === currentView) {
-            btn.classList.add('active');
-        } else if (btn.hasAttribute('data-view')) {
-            btn.classList.remove('active');
-        }
+    // Sidebar nav buttons (data-view switches)
+    const navBtns = document.querySelectorAll('.nav-btn[data-view]');
+    navBtns.forEach(btn => {
+        if (btn.getAttribute('data-view') === currentView) btn.classList.add('active');
+        else btn.classList.remove('active');
 
         btn.addEventListener('click', (e) => {
-            sidebarBtns.forEach(b => {
-                if (b.hasAttribute('data-view')) b.classList.remove('active');
-            });
+            navBtns.forEach(b => b.classList.remove('active'));
             e.target.classList.add('active');
             currentView = e.target.getAttribute('data-view');
 
@@ -48,96 +36,73 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function renderView() {
+        const dateTabs = document.getElementById('dateTabs');
+
         document.querySelectorAll('.shift-list').forEach(list => {
-            let listDate = list.getAttribute('data-date-content');
+            const listDate = list.getAttribute('data-date-content');
 
             if (currentView === 'vagtplan') {
                 list.style.display = (listDate === selectedDate) ? 'flex' : 'none';
-                document.getElementById('dateTabs').style.display = 'flex';
+                if (dateTabs) dateTabs.style.display = 'flex';
             } else {
                 list.style.display = 'flex';
-                document.getElementById('dateTabs').style.display = 'none';
+                if (dateTabs) dateTabs.style.display = 'none';
             }
 
-            let hasVisibleCards = false;
-
+            let hasVisible = false;
             list.querySelectorAll('.shift-card').forEach(card => {
-                let isFrigivet = card.getAttribute('data-frigivet') === 'true';
+                const isFrigivet = card.getAttribute('data-frigivet') === 'true';
+                const dateLabel = card.querySelector('.shift-date-label');
 
                 if (currentView === 'frigivede') {
-                    if (!isFrigivet) {
-                        card.style.display = 'none';
-                    } else {
-                        card.style.display = 'block';
-                        hasVisibleCards = true;
-                    }
-
-                    let dateLabel = card.querySelector('.shift-date-label');
-                    if (dateLabel) dateLabel.style.display = 'block';
+                    card.style.display = isFrigivet ? 'flex' : 'none';
+                    if (isFrigivet) hasVisible = true;
+                    if (dateLabel) dateLabel.style.display = isFrigivet ? 'block' : 'none';
                 } else {
-                    card.style.display = 'block';
-                    hasVisibleCards = true;
-
-                    let dateLabel = card.querySelector('.shift-date-label');
+                    card.style.display = 'flex';
+                    hasVisible = true;
                     if (dateLabel) dateLabel.style.display = 'none';
                 }
             });
 
-            if (currentView === 'frigivede' && !hasVisibleCards) {
-                list.style.display = 'none';
-            }
+            if (currentView === 'frigivede' && !hasVisible) list.style.display = 'none';
         });
     }
 
-    // Initial render
     renderView();
 
-    // Frigiv knapper
+    // Frigiv buttons
     document.querySelectorAll('.btn-release').forEach(btn => {
-        if (btn.innerText === "Frigiv vagt") {
-            btn.addEventListener('click', async (e) => {
-                const button = e.target;
-                const shiftId = button.getAttribute('data-id');
-                if (!shiftId) return;
-
-                try {
-                    const response = await fetch(`/Vagts/Frigiv/${shiftId}`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' }
-                    });
-
-                    if (response.ok) {
-                        window.location.reload();
-                    } else {
-                        alert('Kunne ikke frigive vagten. Prøv igen.');
-                    }
-                } catch (error) {
-                    console.error('Fejl ved frigivelse af vagt:', error);
-                }
-            });
-        }
-    });
-
-    // Tag vagt knapper
-    document.querySelectorAll('.btn-take').forEach(btn => {
         btn.addEventListener('click', async (e) => {
-            const button = e.target;
-            const shiftId = button.getAttribute('data-id');
+            const shiftId = e.target.getAttribute('data-id');
             if (!shiftId) return;
-
             try {
-                const response = await fetch(`/Vagts/TagVagt/${shiftId}`, {
+                const res = await fetch(`/Vagts/Frigiv/${shiftId}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' }
                 });
+                if (res.ok) window.location.reload();
+                else alert('Kunne ikke frigive vagten. Prøv igen.');
+            } catch (err) {
+                console.error(err);
+            }
+        });
+    });
 
-                if (response.ok) {
-                    window.location.reload();
-                } else {
-                    alert('Kunne ikke tage vagten. Måske er den allerede taget?');
-                }
-            } catch (error) {
-                console.error('Fejl ved at tage vagt:', error);
+    // Tag vagt buttons
+    document.querySelectorAll('.btn-take').forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+            const shiftId = e.target.getAttribute('data-id');
+            if (!shiftId) return;
+            try {
+                const res = await fetch(`/Vagts/TagVagt/${shiftId}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                if (res.ok) window.location.reload();
+                else alert('Kunne ikke tage vagten. Måske er den allerede taget?');
+            } catch (err) {
+                console.error(err);
             }
         });
     });

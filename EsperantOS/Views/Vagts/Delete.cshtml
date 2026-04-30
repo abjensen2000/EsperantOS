@@ -4,41 +4,42 @@
     ViewData["Title"] = "Slet Vagt";
 }
 
-<div class="vagtplan-modal">
-    <div class="modal-header">
-        <a asp-action="Index" class="close-btn">&times;</a>
+<div class="shell">
+    <div class="topbar">
+        <span class="topbar-user">@User.Identity?.Name</span>
+        <a asp-controller="Account" asp-action="Logout" class="topbar-logout">Log ud</a>
     </div>
 
-    <div class="modal-body">
-        <div class="sidebar">
-            <a asp-action="Index" class="sidebar-btn">Vagtplan</a>
-            <button class="sidebar-btn sidebar-btn-danger active">Slet Vagt (Admin)</button>
-        </div>
+    <div class="shell-body">
+        <nav class="sidebar">
+            <a asp-action="Index" class="nav-btn">Vagtplan</a>
+            <button class="nav-btn nav-btn-danger active">Slet vagt</button>
+        </nav>
 
-        <div class="main-content main-content-padded">
-            <h2 class="page-title-danger">Er du sikker på, at du vil slette denne vagt?</h2>
+        <div class="main main-pad">
+            <h2 class="page-title-danger">Slet vagt</h2>
 
-            <div class="shift-card shift-card-form">
-                <div class="shift-details shift-details-col">
-                    <dl class="row delete-info">
-                        <dt class="col-sm-3">Dato</dt>
-                        <dd class="col-sm-9">@Model.Dato.ToString("d. MMMM yyyy HH:mm")</dd>
+            <table class="detail-table">
+                <tr>
+                    <th>Dato</th>
+                    <td>@Model.Dato.ToString("d. MMMM yyyy HH:mm")</td>
+                </tr>
+                <tr>
+                    <th>Ædru krævet</th>
+                    <td>@(Model.Ædru ? "Ja" : "Nej")</td>
+                </tr>
+                <tr>
+                    <th>Frigivet</th>
+                    <td>@(Model.Frigivet ? "Ja" : "Nej")</td>
+                </tr>
+            </table>
 
-                        <dt class="col-sm-3">Ædru Krævet?</dt>
-                        <dd class="col-sm-9">@(Model.Ædru ? "Ja" : "Nej")</dd>
-
-                        <dt class="col-sm-3">Er Frigivet?</dt>
-                        <dd class="col-sm-9">@(Model.Frigivet ? "Ja" : "Nej")</dd>
-                    </dl>
-
-                    <div class="delete-actions">
-                        <a asp-action="Index" class="btn-cancel">Annuller</a>
-                        <form asp-action="Delete">
-                            <input type="hidden" asp-for="Id" />
-                            <button type="submit" class="btn-danger">Bekræft Sletning</button>
-                        </form>
-                    </div>
-                </div>
+            <div class="form-actions">
+                <form asp-action="Delete">
+                    <input type="hidden" asp-for="Id" />
+                    <button type="submit" class="btn btn-danger">Bekræft sletning</button>
+                </form>
+                <a asp-action="Index" class="btn btn-secondary">Annuller</a>
             </div>
         </div>
     </div>

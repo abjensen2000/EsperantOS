@@ -9,26 +9,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f39d2630-7671-4300-9c47-a6b8c2ce4b17" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/AGENTS.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EsperantOS/BusinessLogic/VagtBLL.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS/BusinessLogic/VagtBLL.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EsperantOS/Data/EsperantOSContext.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/EsperantOS/DataAccess/Mappers/MedarbejderMapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS/DataAccess/Mappers/MedarbejderMapper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EsperantOS/DataAccess/Mappers/VagtMapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS/DataAccess/Mappers/VagtMapper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EsperantOS/DataAccess/Repositories/MedarbejderRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS/DataAccess/Repositories/MedarbejderRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EsperantOS/DataAccess/Repositories/Repository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS/DataAccess/Repositories/Repository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EsperantOS/DataAccess/Repositories/VagtRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS/DataAccess/Repositories/VagtRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EsperantOS/DataAccess/UnitOfWork/UnitOfWork.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS/DataAccess/UnitOfWork/UnitOfWork.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EsperantOS/EsperantOS.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS/EsperantOS.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EsperantOS/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EsperantOS/Views/Account/Login.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS/Views/Account/Login.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EsperantOS/Views/Home/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS/Views/Home/Index.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EsperantOS/Views/Shared/_Layout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS/Views/Shared/_Layout.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EsperantOS/Views/Vagts/Create.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS/Views/Vagts/Create.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EsperantOS/Views/Vagts/Delete.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS/Views/Vagts/Delete.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EsperantOS/Views/Vagts/Edit.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS/Views/Vagts/Edit.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EsperantOS/Views/Vagts/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS/Views/Vagts/Index.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EsperantOS/css/site.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/EsperantOS/wwwroot/css/site.css" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS/wwwroot/css/site.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.EsperantOS/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.EsperantOS/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AGENTS.md" beforeDir="false" afterPath="$PROJECT_DIR$/AGENTS.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,6 +56,10 @@
 }</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/NuGet.Config" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4

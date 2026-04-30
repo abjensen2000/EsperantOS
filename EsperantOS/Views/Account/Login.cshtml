@@ -1,35 +1,29 @@
 @model EsperantOS.Models.LoginViewModel
 
 @{
-    ViewData["Title"] = "Login";
+    ViewData["Title"] = "Log ind";
+    Layout = "_Layout";
 }
 
-<div class="vagtplan-modal login-modal">
-    <div class="modal-header modal-header-center">
-        <h2 class="login-title">EsperantOS Login</h2>
+<div class="shell shell-login">
+    <div class="login-header">
+        <h1 class="login-title">EsperantOS</h1>
     </div>
-
-    <div class="modal-body modal-body-login">
+    <div class="login-body">
         <form asp-action="Login" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div asp-validation-summary="ModelOnly" class="text-danger" style="margin-bottom:12px;font-size:13px;"></div>
 
-            <div class="login-input-group">
-                <label class="login-label">Brugernavn</label>
-                <div class="login-field">
-                    <span class="icon">👤</span>
-                    <input asp-for="Username" class="login-input" placeholder="Brugernavn" />
-                </div>
+            <div class="field">
+                <label>Brugernavn</label>
+                <input asp-for="Username" placeholder="Brugernavn" autocomplete="username" />
             </div>
 
-            <div class="login-input-group login-input-group-last">
-                <label class="login-label">Kodeord</label>
-                <div class="login-field">
-                    <span class="icon">🔒</span>
-                    <input asp-for="Password" type="password" class="login-input" placeholder="Password" />
-                </div>
+            <div class="field">
+                <label>Kodeord</label>
+                <input asp-for="Password" type="password" placeholder="Kodeord" autocomplete="current-password" />
             </div>
 
-            <button type="submit" class="btn-login">Log ind</button>
+            <button type="submit" class="btn btn-primary btn-lg">Log ind</button>
         </form>
     </div>
 </div>
