@@ -1,4 +1,4 @@
-using EsperantOS.Data;
+using EsperantOS.DataAccess.Context;
 using EsperantOS.DataAccess.UnitOfWork;
 using EsperantOS.BusinessLogic;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -39,7 +39,7 @@ using (var scope = app.Services.CreateScope())
         context.Medarbejdere.AddRange(m1, m2, m3, m4);
         context.SaveChanges();
 
-        // Næste 10 fredage
+        // Nï¿½ste 10 fredage
         var dates = new System.Collections.Generic.List<DateTime>();
         var date = DateTime.Today;
         while (date.DayOfWeek != DayOfWeek.Friday)
@@ -54,7 +54,7 @@ using (var scope = app.Services.CreateScope())
         {
             var fDate = date.AddDays(i * 7).AddHours(16); // fredag kl 16
             
-            // Opret 3 vagt-tider pr. fredag, og giv dem 1-2 medarbejdere hver (hver får sin egen vagt)
+            // Opret 3 vagt-tider pr. fredag, og giv dem 1-2 medarbejdere hver (hver fï¿½r sin egen vagt)
             for (int k = 0; k < 3; k++)
             {
                 var vagtDate = fDate.AddHours(k * 4);
@@ -67,7 +67,7 @@ using (var scope = app.Services.CreateScope())
                     var v = new EsperantOS.Models.Vagt
                     {
                         Dato = vagtDate,
-                        Ædru = (k == 2), // Kun sidste vagt (lukke) kræver ædru
+                        Ã†dru = (k == 2), // Kun sidste vagt (lukke) krï¿½ver ï¿½dru
                         Frigivet = rand.NextDouble() > 0.7,
                         Medarbejdere = new System.Collections.Generic.List<EsperantOS.Models.Medarbejder> { medarbejder }
                     };

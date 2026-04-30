@@ -85,8 +85,24 @@ namespace EsperantOS.BusinessLogic
 
         public async Task UpdateVagtAsync(VagtDTO vagtDto)
         {
-            var vagt = VagtMapper.ToEntity(vagtDto);
-            await _unitOfWork.VagtRepository.UpdateAsync(vagt);
+            // Load the tracked entity so EF Core can diff the many-to-many join table correctly
+            var existing = await _unitOfWork.VagtRepository.GetVagtWithMedarbejdereAsync(vagtDto.Id);
+            if (existing == null) return;
+
+            // Update scalar properties in-place
+            existing.Dato = vagtDto.Dato;
+            existing.Ædru = vagtDto.Ædru;
+            existing.Frigivet = vagtDto.Frigivet;
+
+            // Update medarbejdere collection using tracked entities
+            existing.Medarbejdere.Clear();
+            foreach (var mDto in vagtDto.Medarbejdere)
+            {
+                var medarbejder = await _unitOfWork.MedarbejderRepository.GetByIdAsync(mDto.Id);
+                if (medarbejder != null)
+                    existing.Medarbejdere.Add(medarbejder);
+            }
+
             await _unitOfWork.SaveChangesAsync();
         }
 

@@ -1,4 +1,4 @@
-using EsperantOS.Data;
+using EsperantOS.DataAccess.Context;
 using EsperantOS.Models;
 using Microsoft.EntityFrameworkCore;
 

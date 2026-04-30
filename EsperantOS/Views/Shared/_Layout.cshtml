@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/EsperantOS.styles.css" asp-append-version="true" />
 </head>
-<body style="background-color: #f3f4f6;">
+<body>
 <div class="container-fluid m-0 p-0">
         <main role="main">
             @RenderBody()
@@ -19,6 +19,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/vagts.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

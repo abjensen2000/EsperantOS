@@ -1,4 +1,4 @@
-using EsperantOS.Data;
+using EsperantOS.DataAccess.Context;
 using EsperantOS.DataAccess.Repositories;
 
 namespace EsperantOS.DataAccess.UnitOfWork

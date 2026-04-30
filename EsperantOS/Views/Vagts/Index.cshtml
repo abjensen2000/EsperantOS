@@ -1,4 +1,4 @@
-﻿@model IEnumerable<EsperantOS.Models.Vagt>
+@model IEnumerable<EsperantOS.Models.Vagt>
 
 @{
     var dates = Model.Select(v => v.Dato.Date).Distinct().OrderBy(d => d).ToList();
@@ -6,19 +6,19 @@
 }
 
 <div class="vagtplan-modal">
-<div class="modal-header" style="display: flex; justify-content: flex-end; align-items: center; padding: 10px 15px; height: 48px;">
-    <span style="font-size: 14px; color: #666; font-weight: bold; margin-right: 15px;">👤 Logget ind som: @User.Identity?.Name</span>
-    <a asp-controller="Account" asp-action="Logout" style="font-size: 14px; color: #ef4444; font-weight: bold; text-decoration: none;">Log ud</a>
-</div>
+    <div class="modal-header">
+        <span class="header-user">👤 Logget ind som: @User.Identity?.Name</span>
+        <a asp-controller="Account" asp-action="Logout" class="header-logout">Log ud</a>
+    </div>
 
     <div class="modal-body">
         <div class="sidebar">
-            <a asp-controller="Home" asp-action="Index" class="sidebar-btn" style="text-decoration:none; display:block; text-align:center;">Forside</a>
+            <a asp-controller="Home" asp-action="Index" class="sidebar-btn">Forside</a>
             <button class="sidebar-btn active" data-view="vagtplan">Vagtplan</button>
             <button class="sidebar-btn" data-view="frigivede">Frigivede vagter</button>
-            @if(User.IsInRole("Admin"))
+            @if (User.IsInRole("Admin"))
             {
-                <a asp-action="Create" class="sidebar-btn" style="text-decoration:none; display:inline-block; margin-top:20px; background-color:#3b82f6; color:white; border:none;">+ Opret Vagt</a>
+                <a asp-action="Create" class="sidebar-btn sidebar-btn-primary">+ Opret Vagt</a>
             }
         </div>
 
@@ -37,53 +37,52 @@
                     <div class="shift-list" data-date-content="@date.ToString("yyyy-MM-dd")" style="display: @(date == firstDate ? "flex" : "none");">
                         @foreach (var shift in shiftsOnDate)
                         {
-                            var medarbejderNames = shift.Medarbejdere != null && shift.Medarbejdere.Any() 
-                                ? string.Join(", ", shift.Medarbejdere.Select(m => m.Name)) 
+                            var medarbejderNames = shift.Medarbejdere != null && shift.Medarbejdere.Any()
+                                ? string.Join(", ", shift.Medarbejdere.Select(m => m.Name))
                                 : "Ingen medarbejder";
 
                             <div class="shift-card" data-frigivet="@shift.Frigivet.ToString().ToLower()">
                                 <h3 class="employee-name">
-                                    @if(shift.Frigivet)
+                                    @if (shift.Frigivet)
                                     {
                                         <span>Fri vagt</span>
-                                        <span style="color: #ef4444; font-size: 14px; margin-left: 10px; font-weight: normal;">(@medarbejderNames)</span>
+                                        <span class="released-name">(@medarbejderNames)</span>
                                     }
                                     else
                                     {
                                         <span>@medarbejderNames</span>
                                     }
                                 </h3>
-                                <div class="shift-date-label" style="display: none; font-size: 13px; color: #666; margin-bottom: 10px; font-weight: normal;">
+                                <div class="shift-date-label">
                                     Dato: @shift.Dato.ToString("d. MMMM yyyy")
                                 </div>
                                 <div class="shift-details">
-                                    <div class="time-inputs" style="display: flex; gap: 20px; align-items: center; margin-right: 20px;">
-                                        <div class="input-group" style="width: auto; display: flex; align-items: center; gap: 10px;">
-                                            <label style="font-size: 13px; margin-bottom: 0; color: #64748b; font-weight: bold;">FRA</label>
-                                            <div class="time-field" style="padding: 8px 15px; border-radius: 8px; background-color: #f8fafc; border: 1px solid #e2e8f0; display: flex; align-items: center;">
-                                                <span class="icon" style="font-size: 18px; margin-right: 5px; display: flex; align-items: center;">🕒</span>
-                                                <input type="text" value="@shift.Dato.ToString("HH:mm")" readonly style="width: 65px; text-align: center; font-size: 20px; font-weight: bold; background: transparent; color: #334155; border: none; outline: none; padding: 0; margin: 0; line-height: 1;">
+                                    <div class="time-inputs">
+                                        <div class="time-input-group">
+                                            <label class="time-input-label">FRA</label>
+                                            <div class="time-field-styled">
+                                                <span class="icon">🕒</span>
+                                                <input type="text" value="@shift.Dato.ToString("HH:mm")" readonly class="time-field-input" />
                                             </div>
                                         </div>
-                                        <div style="font-size: 20px; color: #cbd5e1; display: flex; align-items: center;">━</div>
-                                        <div class="input-group" style="width: auto; display: flex; align-items: center; gap: 10px;">
-                                            <label style="font-size: 13px; margin-bottom: 0; color: #64748b; font-weight: bold;">TIL</label>
-                                            <div class="time-field" style="padding: 8px 15px; border-radius: 8px; background-color: #f8fafc; border: 1px solid #e2e8f0; display: flex; align-items: center;">
-                                                <span class="icon" style="font-size: 18px; margin-right: 5px; display: flex; align-items: center;">🕒</span>
-                                                <input type="text" value="@shift.Dato.AddHours(4).ToString("HH:mm")" readonly style="width: 65px; text-align: center; font-size: 20px; font-weight: bold; background: transparent; color: #334155; border: none; outline: none; padding: 0; margin: 0; line-height: 1;">
+                                        <div class="time-separator">━</div>
+                                        <div class="time-input-group">
+                                            <label class="time-input-label">TIL</label>
+                                            <div class="time-field-styled">
+                                                <span class="icon">🕒</span>
+                                                <input type="text" value="@shift.Dato.AddHours(4).ToString("HH:mm")" readonly class="time-field-input" />
                                             </div>
                                         </div>
                                     </div>
                                     <div class="actions">
-                                        @if(User.IsInRole("Admin"))
+                                        @if (User.IsInRole("Admin"))
                                         {
-                                            <a asp-action="Edit" asp-route-id="@shift.Id" style="color: #cbd5e1; text-decoration: none; font-size: 14px;" title="Rediger">✏️</a>
-                                            <a asp-action="Delete" asp-route-id="@shift.Id" style="color: #fca5a5; text-decoration: none; font-size: 14px; margin-right: 10px;" title="Slet">🗑️</a>
+                                            <a asp-action="Edit" asp-route-id="@shift.Id" class="action-edit" title="Rediger">✏️</a>
+                                            <a asp-action="Delete" asp-route-id="@shift.Id" class="action-delete" title="Slet">🗑️</a>
                                         }
-                                        
+
                                         @if (!shift.Frigivet)
                                         {
-                                            // Vagt er taget. Kan kun frigives hvis man ejer vagten eller er Admin
                                             if (shift.Medarbejdere != null && shift.Medarbejdere.Any(m => m.Name == User.Identity.Name) || User.IsInRole("Admin"))
                                             {
                                                 <button class="btn-release" data-id="@shift.Id">Frigiv vagt</button>
@@ -112,172 +111,3 @@
         </div>
     </div>
 </div>
-
-@section Scripts {
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Lukkeknap
-            const closeBtn = document.querySelector('.close-btn');
-            if (closeBtn) {
-                closeBtn.addEventListener('click', () => {
-                    document.querySelector('.vagtplan-modal').style.display = 'none';
-                });
-            }
-
-            // Gennemgå data logic for date tabs og sidebar
-            let urlParams = new URLSearchParams(window.location.search);
-            let currentView = urlParams.get('view') || 'vagtplan'; // vagtplan or frigivede
-            let selectedDate = document.querySelector('.date-tabs .tab.active')?.getAttribute('data-date') || '';
-
-            const dateTabsContainer = document.getElementById('dateTabs');
-            if (dateTabsContainer) {
-                dateTabsContainer.addEventListener('click', (e) => {
-                    if (e.target.classList.contains('tab')) {
-                        // Fjern active
-                        dateTabsContainer.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-                        e.target.classList.add('active');
-                        selectedDate = e.target.getAttribute('data-date');
-                        renderView();
-                    }
-                });
-            }
-
-            const sidebarBtns = document.querySelectorAll('.sidebar-btn');
-            // Sæt den korrekte active tab ved start
-            sidebarBtns.forEach(btn => {
-                if (btn.getAttribute('data-view') === currentView) {
-                    btn.classList.add('active');
-                } else if (btn.hasAttribute('data-view')) {
-                    btn.classList.remove('active');
-                }
-
-                btn.addEventListener('click', (e) => {
-                    sidebarBtns.forEach(b => { 
-                        if(b.hasAttribute('data-view')) b.classList.remove('active'); 
-                    });
-                    e.target.classList.add('active');
-                    currentView = e.target.getAttribute('data-view');
-                    
-                    // Update URL uden at genindlæse
-                    const newUrl = new URL(window.location);
-                    newUrl.searchParams.set('view', currentView);
-                    window.history.pushState({}, '', newUrl);
-
-                    renderView();
-                });
-            });
-
-            function renderView() {
-                // Iterer over shift-lists og vis/gem
-                document.querySelectorAll('.shift-list').forEach(list => {
-                    let listDate = list.getAttribute('data-date-content');
-                    
-                    if (currentView === 'vagtplan') {
-                        list.style.display = (listDate === selectedDate) ? 'flex' : 'none';
-                        document.getElementById('dateTabs').style.display = 'flex';
-                    } else {
-                        // frigivede
-                        list.style.display = 'flex'; // show all lists
-                        document.getElementById('dateTabs').style.display = 'none'; // hide tabs
-                    }
-
-                    let hasVisibleCards = false;
-
-                    // Iterer over kort i listen for at matche 'frigivede' logik
-                    list.querySelectorAll('.shift-card').forEach(card => {
-                        let isFrigivet = card.getAttribute('data-frigivet') === 'true';
-                        
-                        if (currentView === 'frigivede') {
-                            if (!isFrigivet) {
-                                card.style.display = 'none';
-                            } else {
-                                card.style.display = 'block';
-                                hasVisibleCards = true;
-                            }
-                            
-                            // Show date tag
-                            let dateLabel = card.querySelector('.shift-date-label');
-                            if(dateLabel) dateLabel.style.display = 'block';
-                        } else {
-                            card.style.display = 'block';
-                            hasVisibleCards = true;
-                            
-                            // Hide date tag
-                            let dateLabel = card.querySelector('.shift-date-label');
-                            if(dateLabel) dateLabel.style.display = 'none';
-                        }
-                    });
-                    
-                    // If in frigivede view and no cards in this list, hide the list entirely
-                    if (currentView === 'frigivede' && !hasVisibleCards) {
-                        list.style.display = 'none';
-                    }
-                });
-            }
-
-            // Initial render
-            renderView();
-
-            // Frigiv knapper
-            const releaseBtns = document.querySelectorAll('.btn-release');
-            releaseBtns.forEach(btn => {
-                if (btn.innerText === "Frigiv vagt") {
-                    btn.addEventListener('click', async (e) => {
-                        const button = e.target;
-                        const shiftId = button.getAttribute('data-id');
-                        
-                        if (!shiftId) return;
-
-                        try {
-                            // Kald til controlleren
-                            const response = await fetch(`/Vagts/Frigiv/${shiftId}`, {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                }
-                            });
-
-                            if (response.ok) {
-                                // Genindlæs vinduet, så serveren sender det opdaterede kort tilbage m. 'Tag vagt' knappen osv.
-                                window.location.reload();
-                            } else {
-                                alert('Kunne ikke frigive vagten. Prøv igen.');
-                            }
-                        } catch (error) {
-                            console.error('Fejl ved frigivelse af vagt:', error);
-                        }
-                    });
-                }
-            });
-
-            // Tag vagt knapper
-            const takeBtns = document.querySelectorAll('.btn-take');
-            takeBtns.forEach(btn => {
-                btn.addEventListener('click', async (e) => {
-                    const button = e.target;
-                    const shiftId = button.getAttribute('data-id');
-                    
-                    if (!shiftId) return;
-
-                    try {
-                        const response = await fetch(`/Vagts/TagVagt/${shiftId}`, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            }
-                        });
-
-                        if (response.ok) {
-                            // Genindlæs siden så både state og medarbejder-navn kan opdateres korrekt
-                            window.location.reload();
-                        } else {
-                            alert('Kunne ikke tage vagten. Måske er den allerede taget?');
-                        }
-                    } catch (error) {
-                        console.error('Fejl ved at tage vagt:', error);
-                    }
-                });
-            });
-        });
-    </script>
-}

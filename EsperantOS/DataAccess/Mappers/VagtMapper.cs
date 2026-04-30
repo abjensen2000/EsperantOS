@@ -13,7 +13,13 @@ namespace EsperantOS.DataAccess.Mappers
                 Dato = vagt.Dato,
                 Ædru = vagt.Ædru,
                 Frigivet = vagt.Frigivet,
-                Medarbejdere = vagt.Medarbejdere?.Select(MedarbejderMapper.ToDto).ToList() ?? new()
+                Medarbejdere = vagt.Medarbejdere?.Select(m => new MedarbejderDTO
+                {
+                    Id = m.Id,
+                    Name = m.Name,
+                    Bestyrelsesmedlem = m.Bestyrelsesmedlem,
+                    Vagter = new List<VagtDTO>()
+                }).ToList() ?? new()
             };
         }
 

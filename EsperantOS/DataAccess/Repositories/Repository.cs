@@ -1,4 +1,4 @@
-using EsperantOS.Data;
+using EsperantOS.DataAccess.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace EsperantOS.DataAccess.Repositories

@@ -1,7 +1,7 @@
-﻿using EsperantOS.Models;
+using EsperantOS.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace EsperantOS.Data
+namespace EsperantOS.DataAccess.Context
 {
     public class EsperantOSContext : DbContext
     {
