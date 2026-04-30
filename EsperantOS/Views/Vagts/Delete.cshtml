@@ -6,7 +6,7 @@
 
 <div class="shell">
     <div class="topbar">
-        <span class="topbar-user">@User.Identity?.Name</span>
+        <span class="topbar-user">@User.Identity?.Name@(User.IsInRole("Admin") ? " · Admin" : "")</span>
         <a asp-controller="Account" asp-action="Logout" class="topbar-logout">Log ud</a>
     </div>
 

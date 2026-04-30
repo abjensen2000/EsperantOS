@@ -4,12 +4,20 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using EsperantOS.BusinessLogic;
 using EsperantOS.Models;
 
 namespace EsperantOS.Controllers
 {
     public class AccountController : Controller
     {
+        private readonly MedarbejderBLL _medarbejderBLL;
+
+        public AccountController(MedarbejderBLL medarbejderBLL)
+        {
+            _medarbejderBLL = medarbejderBLL;
+        }
+
         [HttpGet]
         public IActionResult Login()
         {
@@ -23,11 +31,15 @@ namespace EsperantOS.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
-            if (model.Username == "simon" && model.Password == "test123")
+            if (model.Username.Equals("simon", StringComparison.OrdinalIgnoreCase) && model.Password == "test123")
             {
+                // Look up the real DB name so the claim matches exactly
+                var medarbejder = await _medarbejderBLL.GetMedarbejderByNameAsync(model.Username);
+                var displayName = medarbejder?.Name ?? model.Username;
+
                 var claims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.Name, model.Username),
+                    new Claim(ClaimTypes.Name, displayName),
                     new Claim(ClaimTypes.Role, "Admin")
                 };
 

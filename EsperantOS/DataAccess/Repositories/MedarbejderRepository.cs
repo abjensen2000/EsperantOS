@@ -21,7 +21,7 @@ namespace EsperantOS.DataAccess.Repositories
         {
             return await _dbSet
                 .Include(m => m.Vagter)
-                .FirstOrDefaultAsync(m => m.Name == name);
+                .FirstOrDefaultAsync(m => m.Name.ToLower() == name.ToLower());
         }
 
         public async Task<List<Medarbejder>> GetBestyrelsesmedlemmerAsync()
