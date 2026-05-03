@@ -15,8 +15,9 @@ namespace EsperantOS.DataAccess.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            // SQLite bruges fremfor LocalDB så applikationen virker på alle platforme
-            optionsBuilder.UseSqlite("Data Source=EsperantOS.db");
+            // Guard lets tests inject InMemory/SQLite :memory: without being overridden
+            if (!optionsBuilder.IsConfigured)
+                optionsBuilder.UseSqlite("Data Source=EsperantOS.db");
         }
     }
 }

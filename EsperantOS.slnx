@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="EsperantOS/EsperantOS.csproj" />
+  <Project Path="EsperantOS.Tests/EsperantOS.Tests.csproj" />
 </Solution>
