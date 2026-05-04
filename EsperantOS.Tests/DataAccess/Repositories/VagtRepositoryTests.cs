@@ -6,8 +6,8 @@ using Microsoft.EntityFrameworkCore;
 namespace EsperantOS.Tests.DataAccess.Repositories;
 
 /// <summary>
-/// Repository tests run against an EF Core InMemory database so we test
-/// actual LINQ queries without touching the file system.
+/// Repository-tests kører mod en EF Core InMemory-database, så vi tester
+/// faktiske LINQ-forespørgsler uden at røre filsystemet.
 /// </summary>
 public class VagtRepositoryTests : IDisposable
 {
@@ -17,7 +17,7 @@ public class VagtRepositoryTests : IDisposable
     public VagtRepositoryTests()
     {
         var options = new DbContextOptionsBuilder<EsperantOSContext>()
-            .UseInMemoryDatabase(Guid.NewGuid().ToString()) // unique DB per test
+            .UseInMemoryDatabase(Guid.NewGuid().ToString()) // unik DB per test
             .Options;
 
         _context = new EsperantOSContext(options);
@@ -143,7 +143,7 @@ public class VagtRepositoryTests : IDisposable
     public async Task DeleteAsync_NonExistingId_DoesNotThrow()
     {
         await _repo.DeleteAsync(999);
-        await _context.SaveChangesAsync(); // should not throw
+        await _context.SaveChangesAsync(); // bør ikke kaste en exception
     }
 
     // ── GetVagterByDayOfWeekAsync ─────────────────────────────
@@ -183,7 +183,7 @@ public class VagtRepositoryTests : IDisposable
     [Fact]
     public async Task GetFridayVagterAsync_NoFridayVagter_ReturnsEmpty()
     {
-        AddVagt(NextFriday().AddDays(1)); // Saturday
+        AddVagt(NextFriday().AddDays(1)); // Lørdag
 
         var result = await _repo.GetFridayVagterAsync();
 

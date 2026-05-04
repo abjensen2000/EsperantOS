@@ -2,11 +2,13 @@ using EsperantOS.DataAccess.Context;
 using EsperantOS.DataAccess.UnitOfWork;
 using EsperantOS.BusinessLogic;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<EsperantOSContext>();
+builder.Services.AddDbContext<EsperantOSContext>(options => 
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<VagtBLL>();
 builder.Services.AddScoped<MedarbejderBLL>();

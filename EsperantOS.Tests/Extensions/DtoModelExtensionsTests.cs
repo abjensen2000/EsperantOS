@@ -128,7 +128,7 @@ public class DtoModelExtensionsTests
 
         Assert.Single(model.Vagter);
         Assert.Equal(50, model.Vagter[0].Id);
-        // Nested Medarbejdere must be absent to avoid circular reference
+        // Indlejrede Medarbejdere skal være fraværende for at undgå cirkulær reference
         Assert.Null(model.Vagter[0].Medarbejdere);
     }
 

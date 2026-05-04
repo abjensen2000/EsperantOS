@@ -32,7 +32,7 @@ public class VagtHelpersTests
     [Fact]
     public void GetShiftDateTime_Midnight_ReturnsNextDayAt0000()
     {
-        // 00:00 shifts are stored as Saturday to reflect they happen after midnight
+        // 00:00-vagter gemmes som lørdag for at afspejle at de sker efter midnat
         var friday = GetNextFriday();
         var result = VagtHelpers.GetShiftDateTime(friday, "00:00:00");
         Assert.Equal(friday.Date.AddDays(1), result);
@@ -79,9 +79,9 @@ public class VagtHelpersTests
     [Fact]
     public void GetUpcomingFridaysSelectList_MidnightShift_SelectsTheFridayItBelongsTo()
     {
-        // A 00:00 shift is stored as Saturday; the dropdown should pre-select the Friday
+        // En 00:00-vagt gemmes som lørdag; dropdown'en bør forvælge fredagen
         var friday = GetNextFriday();
-        var midnightShift = friday.AddDays(1); // Saturday 00:00
+        var midnightShift = friday.AddDays(1); // Lørdag 00:00
 
         var result = VagtHelpers.GetUpcomingFridaysSelectList(midnightShift);
 

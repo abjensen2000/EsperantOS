@@ -139,7 +139,7 @@ public class VagtBLLTests
         var vagter = new List<Vagt>
         {
             MakeVagt(1, friday, ædru: false),
-            MakeVagt(2, friday, ædru: true)  // ædru vagt already exists
+            MakeVagt(2, friday, ædru: true)  // ædru vagt eksisterer allerede
         };
         _mockVagtRepo.Setup(r => r.GetFridayVagterAsync()).ReturnsAsync(vagter);
 
@@ -156,7 +156,7 @@ public class VagtBLLTests
         var vagter = new List<Vagt>
         {
             MakeVagt(1, friday, ædru: false),
-            MakeVagt(2, friday, ædru: false)  // no ædru vagt
+            MakeVagt(2, friday, ædru: false)  // ingen ædru vagt
         };
         _mockVagtRepo.Setup(r => r.GetFridayVagterAsync()).ReturnsAsync(vagter);
 

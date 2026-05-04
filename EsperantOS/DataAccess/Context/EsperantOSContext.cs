@@ -7,7 +7,6 @@ namespace EsperantOS.DataAccess.Context
     {
         public EsperantOSContext(DbContextOptions<EsperantOSContext> options) : base(options)
         {
-            Database.EnsureCreated();
         }
 
         public DbSet<Vagt> Vagter { get; set; } = null!;

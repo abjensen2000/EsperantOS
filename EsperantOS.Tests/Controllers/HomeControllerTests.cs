@@ -84,7 +84,7 @@ public class HomeControllerTests
         var friday = DateTime.Today;
         while (friday.DayOfWeek != DayOfWeek.Friday) friday = friday.AddDays(1);
 
-        // Add in reverse order to verify sorting
+        // Tilføj i omvendt rækkefølge for at verificere sortering
         var vagter = new List<Vagt>
         {
             new Vagt { Id = 2, Dato = friday.AddHours(20), Medarbejdere = new List<Medarbejder>() },

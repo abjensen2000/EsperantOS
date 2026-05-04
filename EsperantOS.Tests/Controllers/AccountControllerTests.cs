@@ -120,8 +120,8 @@ public class AccountControllerTests
     }
 
     [Theory]
-    [InlineData("Simon", "test123")]  // correct case also accepted
-    [InlineData("SIMON", "test123")]  // all-caps accepted
+    [InlineData("Simon", "test123")]  // korrekt store/små bogstaver accepteres også
+    [InlineData("SIMON", "test123")]  // kun store bogstaver accepteres
     public async Task Login_Post_CaseInsensitiveUsername_Succeeds(string username, string password)
     {
         var dbUser = new MedarbejderDTO { Id = 1, Name = "Simon" };
@@ -163,7 +163,7 @@ public class AccountControllerTests
     [Fact]
     public async Task Login_Post_ValidCredentials_StoresDbNameInClaim()
     {
-        // DB has "Simon" with capital S; user types "simon" — claim must use the DB name
+        // DB har "Simon" med stort S; bruger skriver "simon" — claim skal bruge DB-navnet
         var dbUser = new MedarbejderDTO { Id = 1, Name = "Simon" };
         ClaimsPrincipal? capturedPrincipal = null;
 
@@ -203,7 +203,7 @@ public class AccountControllerTests
 
         Assert.NotNull(capturedPrincipal);
         var nameClaim = capturedPrincipal!.FindFirst(ClaimTypes.Name);
-        Assert.Equal("Simon", nameClaim?.Value); // must be DB name, not typed name
+        Assert.Equal("Simon", nameClaim?.Value); // skal være DB-navnet, ikke det indtastede navn
     }
 
     // ── Logout ────────────────────────────────────────────────

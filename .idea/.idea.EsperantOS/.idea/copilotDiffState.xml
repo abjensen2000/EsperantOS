@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CopilotDiffPersistence">
+    <option name="pendingDiffs">
+      <map>
+        <entry key="/EsperantOSContext (snapshot).cs">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="/EsperantOSContext (snapshot).cs" />
+              <option name="originalContent" value="using EsperantOS.Models;&#10;using Microsoft.EntityFrameworkCore;&#10;&#10;namespace EsperantOS.DataAccess.Context&#10;{&#10;    public class EsperantOSContext : DbContext&#10;    {&#10;        public EsperantOSContext(DbContextOptions&lt;EsperantOSContext&gt; options) : base(options)&#10;        {&#10;            Database.EnsureCreated();&#10;        }&#10;&#10;        public DbSet&lt;Vagt&gt; Vagter { get; set; } = null!;&#10;        public DbSet&lt;Medarbejder&gt; Medarbejdere { get; set; } = null!;&#10;&#10;        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)&#10;        {&#10;            // Guard lets tests inject InMemory/SQLite :memory: without being overridden&#10;            if (!optionsBuilder.IsConfigured)&#10;                optionsBuilder.UseSqlite(&quot;Data Source=EsperantOS.db&quot;);&#10;        }&#10;    }&#10;}&#10;" />
+              <option name="updatedContent" value="using EsperantOS.Models;&#10;using Microsoft.EntityFrameworkCore;&#10;&#10;namespace EsperantOS.DataAccess.Context&#10;{&#10;    public class EsperantOSContext : DbContext&#10;    {&#10;        public EsperantOSContext(DbContextOptions&lt;EsperantOSContext&gt; options) : base(options)&#10;        {&#10;        }&#10;&#10;        public DbSet&lt;Vagt&gt; Vagter { get; set; } = null!;&#10;        public DbSet&lt;Medarbejder&gt; Medarbejdere { get; set; } = null!;&#10;&#10;        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)&#10;        {&#10;            // Guard lets tests inject InMemory/SQLite :memory: without being overridden&#10;            if (!optionsBuilder.IsConfigured)&#10;                optionsBuilder.UseSqlServer(&quot;Server=(localdb)\\mssqllocaldb;Database=EsperantOS;Trusted_Connection=True;&quot;);&#10;        }&#10;    }&#10;}" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

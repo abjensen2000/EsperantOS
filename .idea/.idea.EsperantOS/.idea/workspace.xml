@@ -10,9 +10,16 @@
   <component name="ChangeListManager">
     <list default="true" id="f39d2630-7671-4300-9c47-a6b8c2ce4b17" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.EsperantOS/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.EsperantOS/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EsperantOS.slnx" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS.slnx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EsperantOS/Controllers/VagtsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS/Controllers/VagtsController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EsperantOS.Tests/BusinessLogic/VagtBLLTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS.Tests/BusinessLogic/VagtBLLTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EsperantOS.Tests/Controllers/AccountControllerTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS.Tests/Controllers/AccountControllerTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EsperantOS.Tests/Controllers/HomeControllerTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS.Tests/Controllers/HomeControllerTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EsperantOS.Tests/Controllers/VagtsControllerTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS.Tests/Controllers/VagtsControllerTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EsperantOS.Tests/DataAccess/Repositories/VagtRepositoryTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS.Tests/DataAccess/Repositories/VagtRepositoryTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EsperantOS.Tests/Extensions/DtoModelExtensionsTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS.Tests/Extensions/DtoModelExtensionsTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EsperantOS.Tests/Helpers/VagtHelpersTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS.Tests/Helpers/VagtHelpersTests.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/EsperantOS/DataAccess/Context/EsperantOSContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS/DataAccess/Context/EsperantOSContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EsperantOS/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EsperantOS/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/EsperantOS/appsettings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,9 +63,6 @@
     &quot;accountId&quot;: &quot;5d8c4cab-5a52-48c4-9f70-5ab4b9c11a33&quot;
   }
 }</component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/NuGet.Config" root0="FORCE_HIGHLIGHTING" />
-  </component>
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
