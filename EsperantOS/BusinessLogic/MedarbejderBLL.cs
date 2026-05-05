@@ -23,13 +23,25 @@ namespace EsperantOS.BusinessLogic
         public async Task<MedarbejderDTO?> GetMedarbejderByIdAsync(int id)
         {
             var medarbejder = await _unitOfWork.MedarbejderRepository.GetMedarbejderWithVagterAsync(id);
-            return medarbejder != null ? MedarbejderMapper.ToDto(medarbejder) : null;
+
+            if (medarbejder == null)
+            {
+                return null;
+            }
+
+            return MedarbejderMapper.ToDto(medarbejder);
         }
 
         public async Task<MedarbejderDTO?> GetMedarbejderByNameAsync(string name)
         {
             var medarbejder = await _unitOfWork.MedarbejderRepository.GetMedarbejderByNameAsync(name);
-            return medarbejder != null ? MedarbejderMapper.ToDto(medarbejder) : null;
+
+            if (medarbejder == null)
+            {
+                return null;
+            }
+
+            return MedarbejderMapper.ToDto(medarbejder);
         }
 
         public async Task<List<MedarbejderDTO>> GetBestyrelsesmedlemmerAsync()

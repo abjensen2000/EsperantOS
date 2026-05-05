@@ -21,7 +21,17 @@ namespace EsperantOS.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var currentUser = User.Identity?.Name ?? "Ukendt";
+            string currentUser;
+
+            if (User.Identity != null && User.Identity.Name != null)
+            {
+                currentUser = User.Identity.Name;
+            }
+            else
+            {
+                currentUser = "Ukendt";
+            }
+
             var mineVagterDto = await _vagtBLL.GetVagterByMedarbejderNameAsync(currentUser);
             var mineVagter = mineVagterDto.ToModelList().OrderBy(v => v.Dato).ToList();
 

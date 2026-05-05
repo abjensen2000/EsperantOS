@@ -7,20 +7,30 @@ namespace EsperantOS.DataAccess.Mappers
     {
         public static MedarbejderDTO ToDto(Medarbejder medarbejder)
         {
-            return new MedarbejderDTO
+            List<VagtDTO> vagter;
+
+            if (medarbejder.Vagter != null)
             {
-                Id = medarbejder.Id,
-                Name = medarbejder.Name,
-                Bestyrelsesmedlem = medarbejder.Bestyrelsesmedlem,
-                // Medarbejdere-listen på hver vagt tømmes for at undgå cirkulær reference
-                Vagter = medarbejder.Vagter?.Select(v => new VagtDTO
+                vagter = medarbejder.Vagter.Select(v => new VagtDTO
                 {
                     Id = v.Id,
                     Dato = v.Dato,
                     Ædru = v.Ædru,
                     Frigivet = v.Frigivet,
                     Medarbejdere = new List<MedarbejderDTO>()
-                }).ToList() ?? new()
+                }).ToList();
+            }
+            else
+            {
+                vagter = new List<VagtDTO>();
+            }
+
+            return new MedarbejderDTO
+            {
+                Id = medarbejder.Id,
+                Name = medarbejder.Name,
+                Bestyrelsesmedlem = medarbejder.Bestyrelsesmedlem,
+                Vagter = vagter
             };
         }
 

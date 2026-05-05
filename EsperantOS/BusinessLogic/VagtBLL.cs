@@ -29,7 +29,13 @@ namespace EsperantOS.BusinessLogic
         public async Task<VagtDTO?> GetVagtByIdAsync(int id)
         {
             var vagt = await _unitOfWork.VagtRepository.GetVagtWithMedarbejdereAsync(id);
-            return vagt != null ? VagtMapper.ToDto(vagt) : null;
+
+            if (vagt == null)
+            {
+                return null;
+            }
+
+            return VagtMapper.ToDto(vagt);
         }
 
         public async Task<List<VagtDTO>> GetVagterByMedarbejderAsync(int medarbejderId)

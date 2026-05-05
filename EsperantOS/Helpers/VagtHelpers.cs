@@ -14,7 +14,7 @@ namespace EsperantOS.Helpers
 
             for (int i = 0; i < 10; i++)
             {
-                // Lukketidsvagten (00:00) gemmes som lørdag – match mod fredag + 1
+                // Lukketidsvagten (00:00) gemmes som lørdag
                 bool isSelected = selectedDate.HasValue &&
                     (selectedDate.Value.Date == date.Date ||
                      (selectedDate.Value.Hour == 0 && selectedDate.Value.Date == date.AddDays(1).Date));

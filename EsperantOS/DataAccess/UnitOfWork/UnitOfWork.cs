@@ -17,12 +17,28 @@ namespace EsperantOS.DataAccess.UnitOfWork
         // ??= opretter kun repository-instansen første gang den tilgås (lazy initialisering)
         public IVagtRepository VagtRepository
         {
-            get { return _vagtRepository ??= new VagtRepository(_context); }
+            get
+            {
+                if (_vagtRepository == null)
+                {
+                    _vagtRepository = new VagtRepository(_context);
+                }
+
+                return _vagtRepository;
+            }
         }
 
         public IMedarbejderRepository MedarbejderRepository
         {
-            get { return _medarbejderRepository ??= new MedarbejderRepository(_context); }
+            get
+            {
+                if (_medarbejderRepository == null)
+                {
+                    _medarbejderRepository = new MedarbejderRepository(_context);
+                }
+
+                return _medarbejderRepository;
+            }
         }
 
         public async Task<int> SaveChangesAsync()

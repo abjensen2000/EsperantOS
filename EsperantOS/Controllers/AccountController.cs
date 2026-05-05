@@ -36,7 +36,16 @@ namespace EsperantOS.Controllers
             {
                 // Hent DB-navn så claimet matcher præcist – ellers fejler vagtopslag
                 var medarbejder = await _medarbejderBLL.GetMedarbejderByNameAsync(model.Username);
-                var displayName = medarbejder?.Name ?? model.Username;
+                string displayName;
+
+                if (medarbejder != null && medarbejder.Name != null)
+                {
+                    displayName = medarbejder.Name;
+                }
+                else
+                {
+                    displayName = model.Username;
+                }
 
                 var claims = new List<Claim>
                 {

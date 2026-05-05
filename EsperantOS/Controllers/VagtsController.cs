@@ -48,7 +48,6 @@ namespace EsperantOS.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(DateTime SelectedDate, string SelectedTime, bool Ædru, bool Frigivet)
         {
             if (SelectedDate.DayOfWeek != DayOfWeek.Friday)
@@ -81,7 +80,6 @@ namespace EsperantOS.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, DateTime SelectedDate, string SelectedTime, bool Ædru, bool Frigivet)
         {
             var vagtDto = await _vagtBLL.GetVagtByIdAsync(id);
@@ -149,7 +147,6 @@ namespace EsperantOS.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (await _vagtBLL.VagtExistsAsync(id))
